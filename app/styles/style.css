@@ -200,6 +200,14 @@ body
 
 .thumbnail img
 {
+    background: white;
+
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+    -webkit-transform: translateZ(0) scale(1.0, 1.0);
+    transform: translateZ(0) scale(1.0, 1.0);
+
     -webkit-transition: all 0.5s ease;
        -moz-transition: all 0.5s ease;
          -o-transition: all 0.5s ease;
