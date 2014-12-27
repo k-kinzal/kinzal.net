@@ -1,0 +1,41 @@
+{
+  "name": "kinzal.net",
+  "version": "1.0.0",
+  "description": "Illustration portfolio of kinzal.",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k-kinzal/kinzal.net.git"
+  },
+  "author": "k-kinzal",
+  "homepage": "http://kinzal.net/",
+  "private": true,
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-autoprefixer": "^2.0.0",
+    "grunt-bower-install": "^1.6.0",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-contrib-imagemin": "^0.9.2",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-livereload": "^0.1.2",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-csso": "^0.6.5",
+    "grunt-image-resize": "^0.4.0",
+    "grunt-open": "^0.2.3",
+    "grunt-regarde": "^0.1.1",
+    "grunt-s3": "^0.2.0-alpha.3",
+    "grunt-template": "^0.2.3",
+    "grunt-text-replace": "^0.4.0",
+    "grunt-uncss": "^0.3.8",
+    "grunt-usemin": "^3.0.0",
+    "jshint-stylish": "^1.0.0",
+    "uglify-save-license": "^0.4.1"
+  }
+}

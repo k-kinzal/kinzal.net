@@ -1,0 +1,11 @@
+{
+  "name": "kinzal.net",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "bootstrap-social": "~4.8.0",
+    "echojs": "~1.6.0",
+    "minified": "~2014.1.0"
+  },
+  "devDependencies": {}
+}
