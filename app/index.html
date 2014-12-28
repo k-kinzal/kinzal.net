@@ -55,7 +55,7 @@
 		  <div class="row">
 		  	{{ images().forEach(function(path, index) { }}
 		    <div class="column col-xs-6 col-sm-3 col-md-2">
-		      <a href="#{{- path }}" class="thumbnail"><img src="images/empty.png" data-echo="//kinzal.imgix.net/images/{{- key }}/{{- path }}?fit=crop&crop=faces,top&w=400&h=400&auto=format&q=60" lazyload="1"/></a>
+		      <a href="#{{- path }}" class="thumbnail"><img src="images/empty.png" width="400" height="400" data-echo="//kinzal.imgix.net/images/{{- key }}/{{- path }}?fit=crop&crop=faces,top&w=400&h=400&auto=format&q=60" lazyload="1"/></a>
 		    </div>
 		 	  {{ }) }}
 		  </div>
