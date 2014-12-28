@@ -137,6 +137,7 @@ body
     display: block;
 
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 
     height: 100%;
     margin-top: -90px;
