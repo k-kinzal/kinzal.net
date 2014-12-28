@@ -67,6 +67,24 @@ body
     background: #fafafa;
 }
 
+@media (min-width: 768px) {
+    .navbar-toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-toggle {
+        display: none;
+    }
+}
+
+@media (max-device-width: 480px) and (orientation: landscape) {
+    .navbar-toggle {
+        display: none;
+    }
+}
+
 #content
 {
     position: relative;
