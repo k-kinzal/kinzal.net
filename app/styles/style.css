@@ -106,11 +106,8 @@ body
     padding: 0;
 }
 
-#content .row:target
+#content .row:not(:last-child)
 {
-    z-index: 99999;
-    top: 0;
-    left: 0;
 
     display: -webkit-box;
 
@@ -123,8 +120,20 @@ body
     -webkit-box-pack: center;
 }
 
+#content .row:not(:last-child) img {
+    display: none;
+}
+
+#content .row:target
+{
+    z-index: 99999;
+    top: 0;
+    left: 0;
+}
+
 #content .row:target img
 {
+    display: block;
     max-width: 100%;
     max-height: 100%;
 }
