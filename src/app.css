@@ -1,0 +1,6 @@
+/* Write your global styles here, in PostCSS syntax */
+@import "@fortawesome/fontawesome-free/css/all.css";
+@import "http://fonts.googleapis.com/css?family=Raleway:100";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
