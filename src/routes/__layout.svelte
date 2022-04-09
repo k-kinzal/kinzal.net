@@ -28,9 +28,9 @@
     }
 </script>
 
-<header><Navbar /></header>
+<header class="xs:sticky md:sticky"><Navbar /></header>
 
-<main class="flex-grow overflow-y-scroll" bind:this={el} on:scroll={handleScroll}>
+<main class="flex-grow lg:overflow-y-scroll xl:overflow-y-scroll 2xl:overflow-y-scroll" bind:this={el} on:scroll={handleScroll}>
   <slot />
 </main>
 

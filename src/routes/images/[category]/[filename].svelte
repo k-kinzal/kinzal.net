@@ -73,24 +73,24 @@
 
 <svelte:window on:keydown={handleKeydown}/>
 
-<div class="absolute z-50 flex flex-row w-screen h-full w-full bg-gray-700" style="margin-top: -65px">
+<div class="absolute top-0 left-0 z-40 w-screen h-full w-full bg-gray-700">
   {#if prevImage}
-  <div class="flex w-48 cursor-pointer" on:click={prevPage}>
-    <p class="m-auto text-3xl text-base-300"><i class="fa-solid fa-caret-left"></i></p>
+  <div class="absolute top-0 left-0 block z-50 h-full w-48 cursor-pointer" on:click={prevPage}>
+    <div class="flex flex-grow h-full">
+      <p class="m-auto text-3xl text-base-300"><i class="fa-solid fa-caret-left"></i></p>
+    </div>
   </div>
-  {:else}
-  <div class="flex w-48"></div>
   {/if}
-  <picture class="flex-grow block h-full w-full" on:click={close}>
-    <source srcset={image.avif} type="image/avif" />
-    <source srcset={image.webp} type="image/webp" />
-    <img srcset={image.png} alt="" class="object-scale-down object-center h-full w-full"/>
+  <picture class="block h-full w-full" on:click={close}>
+    <source srcSet={image.avif} type="image/avif"/>
+    <source srcSet={image.webp} type="image/webp"/>
+    <img srcSet={image.png} alt="" class="object-scale-down object-center h-full w-full"/>
   </picture>
   {#if nextImage}
-  <div class="flex w-48 cursor-pointer" on:click={nextPage}>
-    <p class="m-auto text-3xl text-base-300"><i class="fa-solid fa-caret-right"></i></p>
+  <div class="absolute top-0 right-0 block z-50 h-full w-48 cursor-pointer" on:click={nextPage}>
+    <div class="flex flex-grow h-full">
+      <p class="m-auto text-3xl text-base-300"><i class="fa-solid fa-caret-right"></i></p>
+    </div>
   </div>
-  {:else}
-  <div class="flex w-48"></div>
   {/if}
 </div>

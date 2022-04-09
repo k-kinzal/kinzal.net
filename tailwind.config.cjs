@@ -18,7 +18,7 @@ const config = {
         accent: "#ba2636",
       },
       letterSpacing: {
-        wider: "4px",
+        wider: "6px",
         widest: "10px",
       },
       backdropBlur: {

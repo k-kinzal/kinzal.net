@@ -16,7 +16,7 @@
 </svelte:head>
 
 <div class="relative bg-gray-700">
-  <div class="grid grid-cols-2 2xl:grid-cols-8 xl:grid-cols-5 lg:grid-cols-3">
+  <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
     {#each images.filter(t => t.category === "original") as image}
       <Item image={image} />
     {/each}
