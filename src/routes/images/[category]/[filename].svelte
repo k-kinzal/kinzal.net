@@ -17,80 +17,62 @@
     }
 </script>
 <script lang="ts">
-  import {page} from "$app/stores";
-  import {beforeUpdate} from "svelte";
-  import {goto} from '$app/navigation';
-  import {next, prev} from "$lib/data/images";
+    import {goto} from '$app/navigation';
+
+    import { Swiper, SwiperSlide } from "swiper/svelte";
+    import { Lazy, Navigation, History, Keyboard } from "swiper";
+
+    import "swiper/css";
+    import "swiper/css/lazy";
+    import "swiper/css/navigation";
+
+  // import {images} from "$lib/data/images";
 
   export let category;
   export let image;
-  let nextImage;
-  let prevImage;
 
-  beforeUpdate(() => {
-      nextImage = next(image.src);
-      prevImage = prev(image.src);
-  })
-
-  let nextPage = () => {
-      if (nextImage) goto(nextImage.src);
-  }
-  let prevPage = () => {
-      if (prevImage) goto(prevImage.src);
-  }
   let close = () => {
       goto(category === 'original' ? '/' : `/${category}`);
   }
-  let handleKeydown = (ev) => {
-      switch (ev.code) {
-          case "Space":
-          case "ArrowRight":
-          case "ArrowDown":
-              nextPage();
-              break;
-          case "ArrowLeft":
-          case "ArrowUp":
-              prevPage();
-              break;
-          case "Enter":
-          case "Escape":
-              close();
-              break;
-      }
-  }
 </script>
 
-<svelte:head>
-  <meta property="og:title" content="{image.src}">
-  <meta property="og:type" content="website">
-  <meta property="og:description" content="Kinzal's Portfolio">
-  <meta property="og:url" content="{$page.url}">
-  <meta property="og:image" content="{image.png}">
-  <meta property="og:site_name" content="RakugakiYa">
-  <meta name="twitter:card" content="Summary with Large Image">
-  <meta name="twitter:site" content="@k_kinzal">
-</svelte:head>
-
-<svelte:window on:keydown={handleKeydown}/>
+<!--<svelte:head>-->
+<!--  <meta property="og:title" content="{image.src}">-->
+<!--  <meta property="og:type" content="website">-->
+<!--  <meta property="og:description" content="Kinzal's Portfolio">-->
+<!--  <meta property="og:url" content="{$page.url}">-->
+<!--  <meta property="og:image" content="{image.png}">-->
+<!--  <meta property="og:site_name" content="RakugakiYa">-->
+<!--  <meta name="twitter:card" content="Summary with Large Image">-->
+<!--  <meta name="twitter:site" content="@k_kinzal">-->
+<!--</svelte:head>-->
 
 <div class="absolute top-0 left-0 z-40 w-screen h-full w-full bg-gray-700">
-  {#if prevImage}
-  <div class="absolute top-0 left-0 block z-50 h-full w-48 cursor-pointer" on:click={prevPage}>
-    <div class="flex flex-grow h-full">
-      <p class="m-auto text-3xl text-base-300"><i class="fa-solid fa-caret-left"></i></p>
-    </div>
-  </div>
-  {/if}
-  <picture class="block h-full w-full" on:click={close}>
-    <source srcSet={image.avif} type="image/avif"/>
-    <source srcSet={image.webp} type="image/webp"/>
-    <img srcSet={image.png} alt="" class="object-scale-down object-center h-full w-full"/>
-  </picture>
-  {#if nextImage}
-  <div class="absolute top-0 right-0 block z-50 h-full w-48 cursor-pointer" on:click={nextPage}>
-    <div class="flex flex-grow h-full">
-      <p class="m-auto text-3xl text-base-300"><i class="fa-solid fa-caret-right"></i></p>
-    </div>
-  </div>
-  {/if}
+  <Swiper
+    lazy={{
+      loadPrevNext: true
+    }}
+    navigation={true}
+    history={{
+      key: "",
+    }}
+    keyboard={true}
+    modules={[Lazy, Navigation, History, Keyboard]}
+    class="w-full h-full"
+  >
+    {#each images.filter(t => t.category === category) as image}
+      <SwiperSlide data-history={image.src.replace(/^.*[\\\/]/, '')}>
+        <picture class="block h-full w-full" on:click={close}>
+          <source data-srcset={image.avif} type="image/avif" />
+          <source data-srcset={image.webp} type="image/webp" />
+          <img data-srcset={image.png} alt="" class="object-scale-down object-center h-full w-full swiper-lazy" />
+        </picture>
+        <div class="swiper-lazy-preloader swiper-lazy-preloader-white animate-spin"></div>
+      </SwiperSlide>
+    {/each}
+  </Swiper>
 </div>
+
+<style>
+
+</style>

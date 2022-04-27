@@ -3,7 +3,7 @@
     import {afterNavigate} from "$app/navigation";
     import {page} from "$app/stores"
     import {page as state} from "$lib/stores/page";
-    import Navbar from "$lib/components/Navbar.svelte";
+    import Header from "$lib/components/Header.svelte";
     import Footer from "$lib/components/Footer.svelte";
 
     let el;
@@ -28,7 +28,7 @@
     }
 </script>
 
-<header class="xs:sticky md:sticky"><Navbar /></header>
+<Header />
 
 <main class="flex-grow lg:overflow-y-scroll xl:overflow-y-scroll 2xl:overflow-y-scroll" bind:this={el} on:scroll={handleScroll}>
   <slot />

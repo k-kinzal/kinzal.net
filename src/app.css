@@ -4,3 +4,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+div.swiper-button-next, div.swiper-button-prev {
+    opacity: 0 !important;
+    position: absolute;
+    top: 0;
+    height: 100% !important;
+    width: 10% !important;
+}
+div.swiper-button-next {
+    right: 0 !important;
+}
+div.swiper-button-prev {
+    left: 0 !important;
+}
+
+.swiper-button-disabled {
+    opacity: 0 !important;
+}
