@@ -1,7 +1,4 @@
 <script lang="ts">
-    import "./nav.css"
-    import "@fortawesome/fontawesome-free/css/all.css"
-
     import {page} from "$app/stores";
 
     export let style = undefined

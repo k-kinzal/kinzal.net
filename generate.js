@@ -1,61 +1,73 @@
 import fs from "fs";
+import glob from "glob";
 
-let paths1 = fs.readdirSync('static/images/original').map(src => `/images/original/${src}`).reverse();
-let paths2 = fs.readdirSync('static/images/scrap').map(src => `/images/scrap/${src}`).reverse();
+let paths = glob.sync('static/images/*/*').reverse().map((p, i) => {
+    let found = p.match(/^static\/images\/([^\/]+)\/.*?\.(?:jpg|jpeg|png|gif)$/);
+    if (!found || found.length !== 2) {
+        throw new Error(`unexpected file path: ${p}: ${JSON.stringify(found)}`);
+    }
+
+    return {
+        key: p.replace(/^static\/images/, '').replace(/\..+$/, ''),
+        path: found[0],
+        category: found[1],
+        index: String(i).padStart(3, '0')
+    }
+});
+
 let file = `
-import img from "../../../static/ogp.png?width=1200&height=630&format=png&fit=cover";
-export let ogp = img;
+${ paths.map(({path, index}) => `import _${index} from '../../../${path}?format=png;webp;avif';` ).join('\n') }
+${ paths.map(({path, index}) => `import _thumb_png_${index} from '../../../${path}?ar=1:1&h=100;200;300&format=png&srcset&fit=cover';`).join('\n') }
+${ paths.map(({path, index}) => `import _thumb_webp_${index} from '../../../${path}?ar=1:1&h=100;200;300&format=webp&srcset&fit=cover';`).join('\n') }
+${ paths.map(({path, index}) => `import _thumb_avif_${index} from '../../../${path}?ar=1:1&h=100;200;300&format=avif&srcset&fit=cover';`).join('\n') }
+import _ogp from "../../../static/ogp.png?width=1200&height=630&format=png&fit=cover";
 
-${ paths1.map((path, i) => `import img1${`${i+1}`.padStart(3,'0')} from '../../../static${path}?format=png;webp;avif';`).join('\n') }
-${ paths2.map((path, i) => `import img2${`${i+1}`.padStart(3,'0')} from '../../../static${path}?format=png;webp;avif';`).join('\n') }
-${ paths1.map((path, i) => `import thp1${`${i+1}`.padStart(3,'0')} from '../../../static${path}?ar=1:1&h=100;200;300&format=png&srcset&fit=cover';`).join('\n') }
-${ paths1.map((path, i) => `import thw1${`${i+1}`.padStart(3,'0')} from '../../../static${path}?ar=1:1&h=100;200;300&format=webp&srcset&fit=cover';`).join('\n') }
-${ paths1.map((path, i) => `import tha1${`${i+1}`.padStart(3,'0')} from '../../../static${path}?ar=1:1&h=100;200;300&format=avif&srcset&fit=cover';`).join('\n') }
-${ paths2.map((path, i) => `import thp2${`${i+1}`.padStart(3,'0')} from '../../../static${path}?ar=1:1&h=100;200;300&format=png&srcset&fit=cover';`).join('\n') }
-${ paths2.map((path, i) => `import thw2${`${i+1}`.padStart(3,'0')} from '../../../static${path}?ar=1:1&h=100;200;300&format=webp&srcset&fit=cover';`).join('\n') }
-${ paths2.map((path, i) => `import tha2${`${i+1}`.padStart(3,'0')} from '../../../static${path}?ar=1:1&h=100;200;300&format=avif&srcset&fit=cover';`).join('\n') }
-
-export interface Thumbnail {
-    png: string,
-    webp: string,
-    avif: string,
-}
+export type MIMEType = "image/jpg" | "image/png" | "image/avif" | "image/webp";
+export const ImageCategory = {
+    ORIGINAL: "original",
+    SCRAP: "scrap",
+} as const;
+export type ImageCategory = typeof ImageCategory[keyof typeof ImageCategory];
+export type ImageID = ${ paths.map(({key}) => `"${key}"`).join(' | ') };
 
 export interface Image {
-    category: "original" | "scrap",
-    src: string,
-    png: string,
-    webp: string,
-    avif: string,
-    thumbnai: Thumbnail,
+    src?: string,
+    srcset?: string,
+    type: MIMEType
 }
 
-export let images = [
-${ paths1.map((src, i) => `    {"category":"original","src":"${src.replace(/\..*$/,'')}","png":img1${`${i+1}`.padStart(3,'0')}[0],"webp":img1${`${i+1}`.padStart(3,'0')}[1],"avif":img1${`${i+1}`.padStart(3,'0')}[2],"thumbnail":{"png":thp1${`${i+1}`.padStart(3,'0')},"webp":thw1${`${i+1}`.padStart(3,'0')},"avif":tha1${`${i+1}`.padStart(3,'0')}}},`).join('\n') }
-${ paths2.map((src, i) => `    {"category":"scrap","src":"${src.replace(/\..*$/,'')}","png":img2${`${i+1}`.padStart(3,'0')}[0],"webp":img2${`${i+1}`.padStart(3,'0')}[1],"avif":img2${`${i+1}`.padStart(3,'0')}[2],"thumbnail":{"png":thp2${`${i+1}`.padStart(3,'0')},"webp":thw2${`${i+1}`.padStart(3,'0')},"avif":tha2${`${i+1}`.padStart(3,'0')}}},`).join('\n') }
-] as Image[];
-
-let mapping = {
-${ paths1.map((src, i) => `    "${src.replace(/\..*$/,'')}": ${i},` ).join('\n') }
-${ paths2.map((src, i) => `    "${src.replace(/\..*$/,'')}": ${i + paths1.length},` ).join('\n') }
+export interface Thumbnail {
+    defaults: Image,
+    responsives: Image[]
 }
 
-export let prev = (src: string) => {
-    let index = mapping[src];
-    if (index === null || index === 0) {
-        return null
-    }
-    let image = images[index - 1];
-    return mapping[image.src] < index ? image : null;
+export interface Item {
+    key: ImageID,
+    category: ImageCategory,
+    defaults: Image,
+    responsives: Image[]
+    thumbnail: Thumbnail,
 }
-export let next = (src: string) => {
-    let index = mapping[src];
-    if (index === null || index === images.length - 1) {
-        return null
-    }
-    let image = images[index + 1];
-    return mapping[image.src] > index ? image : null;
+
+let ogp: Image = {
+    src: _ogp,
+    type: "image/png"
+};
+
+let _items: Item[] = [
+${ paths.map(({key, category, index}) => `    {"key":"${key}","category":"${category}","defaults":{"src":_${index}[0],"type":"image/png"},"responsives":[{"src":_${index}[1],"type":"image/webp"},{"src":_${index}[2],"type":"image/avif"}],"thumbnail":{"defaults":{"srcset":_thumb_png_${index},"type":"image/png"},"responsives":[{"srcset":_thumb_webp_${index},"type":"image/webp"},{"srcset":_thumb_avif_${index},"type":"image/avif"}]}},`).join('\n') }
+];
+
+let _m = {
+${ paths.map(({key}, i) => `    "${key}": ${i},` ).join('\n') }
 }
+
+export let items = (category: ImageCategory): Item[] => {
+    return _items.filter((i) => i.category == category);
+};
+export let item = (src: string): Item | null => {
+    return _items[_m[src]] || null;
+};
 `
 
 console.log(file.trim())

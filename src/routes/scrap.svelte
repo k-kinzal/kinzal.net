@@ -1,7 +1,7 @@
 <script lang="ts">
     import {page} from "$app/stores";
-    import Item from '$lib/components/Item.svelte'
-    import {images, ogp} from "$lib/data/images";
+    import {ogp} from "$lib/data/images";
+    import List from "$lib/components/List.svelte";
 </script>
 
 <svelte:head>
@@ -15,10 +15,4 @@
   <meta name="twitter:site" content="@k_kinzal">
 </svelte:head>
 
-<div class="relative bg-gray-700">
-  <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-    {#each images.filter(t => t.category === "scrap") as image}
-      <Item image={image} />
-    {/each}
-  </div>
-</div>
+<List category="scrap" />

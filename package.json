@@ -18,6 +18,7 @@
     "@sveltejs/kit": "^1.0.0-next.294",
     "autoprefixer": "^10.4.2",
     "cssnano": "^5.1.0",
+    "glob": "^8.0.1",
     "postcss": "^8.4.5",
     "postcss-load-config": "^3.1.1",
     "purgecss-from-html": "^4.1.1",
@@ -29,6 +30,7 @@
     "tailwindcss": "^3.0.12",
     "tslib": "^2.3.1",
     "typescript": "~4.5.4",
+    "vanilla-lazyload": "^17.8.1",
     "vite-imagetools": "^4.0.3"
   },
   "type": "module",
