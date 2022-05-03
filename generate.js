@@ -49,24 +49,13 @@ export interface Item {
     thumbnail: Thumbnail,
 }
 
-let ogp: Image = {
+export let ogp: Image = {
     src: _ogp,
     type: "image/png"
 };
 
-let _items: Item[] = [
-${ paths.map(({key, category, index}) => `    {"key":"${key}","category":"${category}","defaults":{"src":_${index}[0],"type":"image/png"},"responsives":[{"src":_${index}[1],"type":"image/webp"},{"src":_${index}[2],"type":"image/avif"}],"thumbnail":{"defaults":{"srcset":_thumb_png_${index},"type":"image/png"},"responsives":[{"srcset":_thumb_webp_${index},"type":"image/webp"},{"srcset":_thumb_avif_${index},"type":"image/avif"}]}},`).join('\n') }
-];
-
-let _m = {
-${ paths.map(({key}, i) => `    "${key}": ${i},` ).join('\n') }
-}
-
-export let items = (category: ImageCategory): Item[] => {
-    return _items.filter((i) => i.category == category);
-};
-export let item = (src: string): Item | null => {
-    return _items[_m[src]] || null;
+export let items: {[key in ImageID]: Item} = {
+${ paths.map(({key, category, index}) => `    "${key}": {"key":"${key}","category":"${category}","defaults":{"src":_${index}[0],"type":"image/png"},"responsives":[{"src":_${index}[1],"type":"image/webp"},{"src":_${index}[2],"type":"image/avif"}],"thumbnail":{"defaults":{"srcset":_thumb_png_${index},"type":"image/png"},"responsives":[{"srcset":_thumb_webp_${index},"type":"image/webp"},{"srcset":_thumb_avif_${index},"type":"image/avif"}]}},`).join('\n') }
 };
 `
 

@@ -26,7 +26,7 @@
     keyboard={true}
     modules={[Lazy, Navigation, History, Keyboard]}
     class="w-full h-full">
-    {#each items(category) as item}
+    {#each Object.values(items).filter(v => v.category === category).sort((a, b) => a.key < b.key ? 1 : -1) as item}
     <SwiperSlide data-history={item.key.replace(/^.*[\\\/]/, '')}>
       <div class="block w-full h-full" on:click={close}>
         <picture>

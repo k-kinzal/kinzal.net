@@ -1,10 +1,10 @@
 <script context="module" lang="ts">
-    import {item} from "$lib/data/images";
+    import {items} from "$lib/data/images";
 
     export async function load({params}) {
         let category = params.category;
         let filename = params.filename;
-        let image = item(`/${category}/${filename}`);
+        let image = items[`/${category}/${filename}`];
         if (!image) {
             return { fallthrough: true };
         }
