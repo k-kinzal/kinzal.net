@@ -19,14 +19,21 @@
         if (from === null || !from.pathname.startsWith(`/${category}/`)) {
             return;
         }
+        let scrollPosition = scrollPositions[category] || 0;
         wait(() => {
-            el.scrollTop = scrollPositions[category]
-            return el.scrollTop === scrollPositions[category];
+            el.scrollTop = scrollPosition;
+            console.log(el.scrollTop, scrollPosition)
+            return el.scrollTop === scrollPosition;
         });
     });
+
+    let handleScroll = (e) => {
+        scrollPositions[category] = e.target.scrollTop;
+        console.log(scrollPositions[category])
+    }
 </script>
 
-<div class="bg-gray-700 h-full w-full md:overflow-y-scroll" bind:this={el} on:scroll={e => scrollPositions[category] = e.target.scrollTop}>
+<div class="bg-gray-700 h-full w-full md:overflow-y-scroll" bind:this={el} on:scroll={handleScroll}>
   <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
     {#each Object.values(items).filter(v => v.category === category).sort((a, b) => a.key < b.key ? 1 : -1) as item}
     <Thumbnail item={item} />

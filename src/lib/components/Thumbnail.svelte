@@ -7,7 +7,7 @@
 
   let containerElement: HTMLDivElement;
   onMount(() => {
-      new LazyLoad({use_native: true}, containerElement.querySelectorAll('picture > img'));
+      new LazyLoad({use_native: false}, containerElement.querySelectorAll('picture > img'));
   });
 </script>
 
@@ -17,7 +17,7 @@
       {#each item.thumbnail.responsives as image}
       <source data-src={image.src} data-srcset={image.srcset} type={image.type} />
       {/each}
-      <img src={item.thumbnail.defaults.src || "/images/empty.png"} data-srcset={item.thumbnail.defaults.srcset} alt="" loading="lazy" class="block h-full w-full object-cover" />
+      <img src={item.thumbnail.defaults.src || "/images/empty.png"} data-bg="/images/empty.png" data-srcset={item.thumbnail.defaults.srcset} alt="" loading="lazy" class="block h-full w-full object-cover" />
     </picture>
     <div class="absolute inset-0 z-10 h-full bg-base-300 bg-opacity-30 opacity-0 backdrop-blur-xs hover:opacity-100 border-4 border-white/20 duration-300"></div>
   </a>
