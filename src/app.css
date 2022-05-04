@@ -1,21 +1,21 @@
 /* Write your global styles here, in PostCSS syntax */
-@import "@fortawesome/fontawesome-free/css/all.css";
-@import "http://fonts.googleapis.com/css?family=Raleway:100";
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import url(https://fonts.googleapis.com/css?family=Raleway:100);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-div.swiper-button-next, div.swiper-button-prev {
+.swiper-button-next, .swiper-button-prev {
     opacity: 0 !important;
     position: absolute;
     top: 0;
     height: 100% !important;
     width: 10% !important;
 }
-div.swiper-button-next {
+.swiper-button-next {
     right: 0 !important;
 }
-div.swiper-button-prev {
+.swiper-button-prev {
     left: 0 !important;
 }
 

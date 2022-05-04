@@ -22,11 +22,3 @@
     </ul>
   </div>
 </nav>
-
-<style>
-  @import "@fortawesome/fontawesome-free/css/all.css";
-
-  @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
-</style>

@@ -1,4 +1,3 @@
-import fs from "fs";
 import glob from "glob";
 
 let paths = glob.sync('static/images/*/*').reverse().map((p, i) => {
@@ -20,7 +19,8 @@ ${ paths.map(({path, index}) => `import _${index} from '../../../${path}?format=
 ${ paths.map(({path, index}) => `import _thumb_png_${index} from '../../../${path}?ar=1:1&h=100;200;300&format=png&srcset&fit=cover';`).join('\n') }
 ${ paths.map(({path, index}) => `import _thumb_webp_${index} from '../../../${path}?ar=1:1&h=100;200;300&format=webp&srcset&fit=cover';`).join('\n') }
 ${ paths.map(({path, index}) => `import _thumb_avif_${index} from '../../../${path}?ar=1:1&h=100;200;300&format=avif&srcset&fit=cover';`).join('\n') }
-import _ogp from "../../../static/ogp.png?width=1200&height=630&format=png&fit=cover";
+${ paths.map(({path, index}) => `import _ogp_${index} from '../../../${path}?format=png&width=1200&height=630&fit=cover';` ).join('\n') }
+
 
 export type MIMEType = "image/jpg" | "image/png" | "image/avif" | "image/webp";
 export const ImageCategory = {
@@ -47,15 +47,11 @@ export interface Item {
     defaults: Image,
     responsives: Image[]
     thumbnail: Thumbnail,
+    ogp: Image,
 }
 
-export let ogp: Image = {
-    src: _ogp,
-    type: "image/png"
-};
-
 export let items: {[key in ImageID]: Item} = {
-${ paths.map(({key, category, index}) => `    "${key}": {"key":"${key}","category":"${category}","defaults":{"src":_${index}[0],"type":"image/png"},"responsives":[{"src":_${index}[1],"type":"image/webp"},{"src":_${index}[2],"type":"image/avif"}],"thumbnail":{"defaults":{"srcset":_thumb_png_${index},"type":"image/png"},"responsives":[{"srcset":_thumb_webp_${index},"type":"image/webp"},{"srcset":_thumb_avif_${index},"type":"image/avif"}]}},`).join('\n') }
+${ paths.map(({key, category, index}) => `    "${key}": {"key":"${key}","category":"${category}","defaults":{"src":_${index}[0],"type":"image/png"},"responsives":[{"src":_${index}[1],"type":"image/webp"},{"src":_${index}[2],"type":"image/avif"}],"thumbnail":{"defaults":{"srcset":_thumb_png_${index},"type":"image/png"},"responsives":[{"srcset":_thumb_webp_${index},"type":"image/webp"},{"srcset":_thumb_avif_${index},"type":"image/avif"}]},"ogp":{"src":_ogp_${index},"type":"image/png"}},`).join('\n') }
 };
 `
 

@@ -2,7 +2,8 @@
   "name": "kinzal.net",
   "version": "202202.26.01",
   "scripts": {
-    "gen": "node generate.js > src/lib/data/images.ts",
+    "postinstall": "npm run gen",
+    "gen": "node scripts/generate_images.js > src/lib/data/images.ts",
     "dev": "npm run gen && svelte-kit dev",
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",

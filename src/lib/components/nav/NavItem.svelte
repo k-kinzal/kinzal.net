@@ -21,9 +21,3 @@
     <span class="m-auto">{title}</span>
   </a>
 </li>
-
-<style>
-    @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
-</style>

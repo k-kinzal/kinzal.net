@@ -8,25 +8,25 @@ const autoprefixer = require("autoprefixer");
 const config = {
   plugins: [
     tailwindcss(),
-    // purgecss({
-    //   content: ['**/*.html', '**/*.svelte'],
-    //   css: ['**/*.css'],
-    //   safelist: {
-    //     standard: [/svelte-/, /s-/, /ssbc-/, /share-/, /svg/, /swiper-/],
-    //     deep: [/svelte-/, /s-/, /ssbc-/, /share-/, /svg/, /swiper-/],
-    //     greedy: [/svelte-/, /s-/, /ssbc-/, /share-/, /svg/, /swiper-/]
-    //   },
-    //   extractors: [
-    //     {
-    //       extractor: purgeHtml,
-    //       extensions: ['html']
-    //     },
-    //     {
-    //       extractor: content => purgeSvelte.extract(content),
-    //       extensions: ["svelte"]
-    //     }
-    //   ]
-    // }),
+    purgecss({
+      content: ['**/*.html', '**/*.svelte'],
+      css: ['**/*.css'],
+      safelist: {
+        standard: [/swiper-/, /:/],
+        deep: [/swiper-/, /:/],
+        greedy: [/swiper-/, /:/]
+      },
+      extractors: [
+        {
+          extractor: purgeHtml,
+          extensions: ['html']
+        },
+        {
+          extractor: content => purgeSvelte.extract(content),
+          extensions: ["svelte"]
+        }
+      ]
+    }),
     cssnano({ preset: 'default' }),
     autoprefixer,
   ],

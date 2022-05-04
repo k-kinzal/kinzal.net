@@ -46,7 +46,11 @@ declare module '*.jpg?ar=1:1&h=100;200;300&format=avif&srcset&fit=cover' {
     export default v
 }
 // OGP on vite-imagetools
-declare module '*.png?width=1200&height=630&format=png&fit=cover' {
+declare module '*.png?format=png&width=1200&height=630&fit=cover' {
+    const v: string
+    export default v
+}
+declare module '*.jpg?format=png&width=1200&height=630&fit=cover' {
     const v: string
     export default v
 }
