@@ -8,7 +8,8 @@
 .swiper-button-next, .swiper-button-prev {
     opacity: 0 !important;
     position: absolute;
-    top: 0;
+    top: 0 !important;
+    margin: 0 !important;
     height: 100% !important;
     width: 10% !important;
 }
@@ -17,8 +18,4 @@
 }
 .swiper-button-prev {
     left: 0 !important;
-}
-
-.swiper-button-disabled {
-    opacity: 0 !important;
 }

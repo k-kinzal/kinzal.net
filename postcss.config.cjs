@@ -12,9 +12,9 @@ const config = {
       content: ['**/*.html', '**/*.svelte'],
       css: ['**/*.css'],
       safelist: {
-        standard: [/swiper-/, /:/],
-        deep: [/swiper-/, /:/],
-        greedy: [/swiper-/, /:/]
+        standard: [/:/, /swiper-/, /ssbc-/],
+        deep: [/:/, /swiper-/, /ssbc-/],
+        greedy: [/:/, /swiper-/, /ssbc-/]
       },
       extractors: [
         {

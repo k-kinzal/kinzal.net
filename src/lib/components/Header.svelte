@@ -17,7 +17,7 @@
         title={link.title}
         href={link.url}
         rel={link.rel}
-        class="bg-white border-l border-base-300 font-raleway text-xs text-base-900 select:bg-base-50 select:pointer-events-none tracking-wide lg:tracking-wider hover:bg-base-50 duration-300" />
+        class="bg-white font-raleway text-xs text-base-900 tracking-wide lg:tracking-wider hover:bg-base-50 duration-300" />
       {/each}
     </svelte:fragment>
   </NavBar>
