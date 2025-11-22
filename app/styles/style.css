@@ -240,6 +240,10 @@ body
        -moz-transition: all 0.5s ease;
          -o-transition: all 0.5s ease;
             transition: all 0.5s ease;
+
+    object-fit: cover;
+    width: 100%;
+    aspect-ratio: 1 / 1;
 }
 
 .thumbnail img[data-echo]

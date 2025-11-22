@@ -63,7 +63,8 @@ templateContent = templateContent.replace(
 // Fix other paths (images, etc)
 templateContent = templateContent
     .replace(/href="images\//g, 'href="app/images/')
-    .replace(/src="images\//g, 'src="app/images/');
+    .replace(/src="images\//g, 'src="app/images/')
+    .replace(/data-echo="images\//g, 'data-echo="app/images/');
 
 // Also fix the dynamic image paths in JS/HTML?
 // <img data-echo="//kinzal.imgix.net/images/{{- key }}/{{- path }}
