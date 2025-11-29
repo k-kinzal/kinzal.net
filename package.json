@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/process-images.js && node scripts/build-html.js && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "repository": {
     "type": "git",
@@ -16,6 +18,10 @@
   "private": true,
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",
+    "@playwright/test": "^1.56.1",
+    "@storybook/addon-docs": "^10.0.8",
+    "@storybook/html-vite": "^10.0.8",
+    "@types/node": "^24.10.1",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "glob": "^10.3.10",
@@ -23,6 +29,7 @@
     "lodash": "^4.17.21",
     "postcss": "^8.4.49",
     "sharp": "^0.33.5",
+    "storybook": "^10.0.8",
     "terser": "^5.44.1",
     "vite": "^6.0.0"
   },

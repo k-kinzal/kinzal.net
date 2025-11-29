@@ -8,3 +8,16 @@ npm-debug.log
 index.html
 original.html
 scrap.html
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+*storybook.log
+storybook-static
+
+.qodo
+.idea
