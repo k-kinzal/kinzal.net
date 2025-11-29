@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "@kinzal-net/ui/styles";
+
+/* App-specific design tokens */
+@theme {
+  /* Brand font */
+  --font-brand: "Raleway", sans-serif;
+
+  /* Layout dimensions - generates h-header, h-footer, pt-header, etc. */
+  --spacing-header: 90px;
+  --spacing-footer: 50px;
+
+  /* Line heights - generates leading-header, leading-footer */
+  --line-height-header: 60px;
+  --line-height-footer: 50px;
+
+  /* Z-index for overlay */
+  --z-index-overlay: 99999;
+}
+
+html,
+body {
+  @apply w-full h-full;
+}
+
+body {
+  @apply overflow-hidden bg-background-dark;
+}

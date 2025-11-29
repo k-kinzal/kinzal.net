@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { Route } from "./+types/original";
-import { Gallery } from "../components/Gallery";
+import { NewGallery } from "../components/NewGallery";
 
 export async function loader({}: Route.LoaderArgs) {
   const imagesDir = path.resolve(process.cwd(), "app/images/original");
@@ -21,7 +21,7 @@ export default function Original({ loaderData }: Route.ComponentProps) {
   const { images, category, year } = loaderData;
 
   return (
-    <Gallery
+    <NewGallery
       images={images}
       category={category}
       year={year}

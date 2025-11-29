@@ -6,10 +6,7 @@ import {
   ScrollRestoration,
 } from "react-router";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "font-awesome/css/font-awesome.css";
-import "bootstrap-social/bootstrap-social.css";
-import "./styles/style.css";
+import "./styles/globals.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

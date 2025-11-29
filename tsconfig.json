@@ -12,7 +12,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "isolatedModules": true,
-    "types": ["vite/client", "@react-router/dev"],
+    "types": ["vite/client"],
     "rootDirs": [".", ".react-router/types"]
   },
   "include": [
