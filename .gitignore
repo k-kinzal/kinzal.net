@@ -1,6 +1,6 @@
 .tmp/
-app/components/
 dist/
+build/
 node_modules/
 .DS_Store
 npm-debug.log
@@ -8,6 +8,9 @@ npm-debug.log
 index.html
 original.html
 scrap.html
+
+# React Router
+.react-router/
 
 # Playwright
 /test-results/
