@@ -1,0 +1,198 @@
+# Accessibility
+
+This design system is built with accessibility as a core principle, following WCAG 2.1 guidelines.
+
+---
+
+## Built-in Accessibility Features
+
+### ARIA Attributes
+
+Components include appropriate ARIA attributes automatically:
+
+| Component | ARIA Support |
+|-----------|--------------|
+| **Alert** | `role="alert"` for important messages |
+| **Spinner** | `role="status"`, `aria-label` for loading state |
+| **Breadcrumb** | `nav` with `aria-label="Breadcrumb"`, `aria-current="page"` |
+| **NavLink** | `aria-current="page"` when active |
+| **TabList** | `role="tablist"` |
+| **TabItem** | `role="tab"`, `aria-selected` |
+| **Icon** | `aria-hidden="true"` (decorative) |
+
+### Focus Management
+
+All interactive components have visible focus states:
+
+```css
+focus-visible:outline-none
+focus-visible:ring-2
+focus-visible:ring-primary
+focus-visible:ring-offset-2
+```
+
+### Motion Preferences
+
+Animations are disabled for users who prefer reduced motion:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## Component-Specific Guidelines
+
+### IconButton
+
+Always provide an `aria-label`:
+
+```tsx
+// Required
+<IconButton aria-label="Share on Twitter">
+  <Icon icon={Twitter} size={20} />
+</IconButton>
+
+// Development warning if omitted
+<IconButton>  {/* Console warning in dev mode */}
+  <Icon icon={Search} />
+</IconButton>
+```
+
+### Images
+
+Provide meaningful `alt` text:
+
+```tsx
+// Meaningful alt text
+<Image src="/photo.jpg" alt="Mountain landscape at sunset" />
+
+// Decorative image
+<Image src="/pattern.svg" alt="" role="presentation" />
+```
+
+### Avatar
+
+Uses `alt` for accessible name, falls back to `aria-label` for initials:
+
+```tsx
+// With image
+<Avatar src="/user.jpg" alt="John Doe" />
+
+// With fallback initials
+<Avatar fallback="JD" alt="John Doe" />
+```
+
+### Headings
+
+Use semantic heading levels:
+
+```tsx
+// Correct hierarchy
+<Heading level={1}>Page Title</Heading>
+  <Heading level={2}>Section</Heading>
+    <Heading level={3}>Subsection</Heading>
+
+// Visual size independent of semantic level
+<Heading level={2} size="sm">Small section title</Heading>
+```
+
+### Links
+
+Use descriptive link text:
+
+```tsx
+// Good
+<Link href="/pricing">View pricing details</Link>
+
+// Avoid
+<Link href="/pricing">Click here</Link>
+```
+
+---
+
+## Color Contrast
+
+The design system meets WCAG AA contrast requirements:
+
+| Element | Ratio | Requirement |
+|---------|-------|-------------|
+| Body text | 7:1+ | AA (4.5:1) |
+| Large text | 4.5:1+ | AA (3:1) |
+| UI components | 3:1+ | AA (3:1) |
+
+### Light Mode
+
+- `foreground` (#171717) on `background` (#ffffff): **12.6:1**
+- `foreground-muted` (#737373) on `background` (#ffffff): **4.6:1**
+
+### Dark Mode
+
+- `foreground-inverse` (#fafafa) on `background-dark` (#1a1a1a): **15.3:1**
+- `foreground-muted-dark` (#a3a3a3) on `background-dark` (#1a1a1a): **7.2:1**
+
+---
+
+## Keyboard Navigation
+
+All interactive components support keyboard navigation:
+
+| Component | Keys |
+|-----------|------|
+| **Button** | `Enter`, `Space` to activate |
+| **Link** | `Enter` to follow |
+| **IconButton** | `Enter`, `Space` to activate |
+| **TabItem** | `Enter`, `Space` to select |
+
+### Focus Order
+
+Components maintain logical focus order through the DOM structure. Use `tabIndex` only when necessary.
+
+---
+
+## Testing Accessibility
+
+### Automated Testing
+
+The design system uses `jest-axe` for automated accessibility testing:
+
+```tsx
+import { axe, toHaveNoViolations } from "jest-axe";
+
+expect.extend(toHaveNoViolations);
+
+it("has no accessibility violations", async () => {
+  const { container } = render(<Button>Click me</Button>);
+  const results = await axe(container);
+  expect(results).toHaveNoViolations();
+});
+```
+
+### Storybook A11y Addon
+
+Every component story is tested with the `@storybook/addon-a11y` addon, which checks for:
+
+- Color contrast
+- Missing ARIA labels
+- Invalid ARIA attributes
+- Focus management issues
+
+### Manual Testing Checklist
+
+1. **Keyboard-only navigation** - Can you use the component without a mouse?
+2. **Screen reader** - Does the component announce correctly?
+3. **Zoom** - Does the UI work at 200% zoom?
+4. **Color blindness** - Is information conveyed without color alone?
+
+---
+
+## Resources
+
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [WAI-ARIA Practices](https://www.w3.org/WAI/ARIA/apg/)
+- [Accessible Rich Internet Applications](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA)

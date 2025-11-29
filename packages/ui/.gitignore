@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Test outputs
+test-results/
+coverage/
+
+# Storybook
+storybook-static/
+*storybook.log
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+.tmp/
+*.tmp

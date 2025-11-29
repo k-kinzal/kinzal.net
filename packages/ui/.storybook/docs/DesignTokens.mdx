@@ -1,0 +1,101 @@
+# Design Tokens
+
+Design tokens are the visual design atoms of the design system. They define colors, spacing, typography, and other visual properties.
+
+## Colors
+
+### Primary
+
+The primary color is used for main actions and emphasis.
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `primary` | `#3b82f6` | Primary buttons, links, focus rings |
+| `primary-50` to `primary-950` | Blue scale | Hover states, backgrounds |
+
+### Semantic Colors
+
+| Token | Light | Dark | Usage |
+|-------|-------|------|-------|
+| `background` | `#ffffff` | `#1a1a1a` | Page background |
+| `background-muted` | `#f5f5f5` | `#2a2a2a` | Secondary backgrounds |
+| `foreground` | `#171717` | `#fafafa` | Primary text |
+| `foreground-muted` | `#737373` | `#a3a3a3` | Secondary text |
+| `border` | `#e5e5e5` | `#404040` | Borders, dividers |
+
+### Status Colors
+
+| Status | Color | Usage |
+|--------|-------|-------|
+| Success | `green-500` | Success alerts, positive actions |
+| Warning | `yellow-500` | Warning alerts, caution states |
+| Error | `red-500` | Error alerts, destructive actions |
+| Info | `primary` | Informational alerts |
+
+## Spacing
+
+Use consistent spacing throughout the design system.
+
+| Name | Value | Tailwind |
+|------|-------|----------|
+| `xs` | 4px | `gap-1`, `p-1` |
+| `sm` | 8px | `gap-2`, `p-2` |
+| `md` | 16px | `gap-4`, `p-4` |
+| `lg` | 24px | `gap-6`, `p-6` |
+| `xl` | 32px | `gap-8`, `p-8` |
+
+## Typography
+
+### Font Family
+
+```css
+font-family: system-ui, -apple-system, sans-serif;
+```
+
+### Font Sizes
+
+| Name | Size | Usage |
+|------|------|-------|
+| `xs` | 12px | Captions, labels |
+| `sm` | 14px | Small text, metadata |
+| `base` | 16px | Body text |
+| `lg` | 18px | Large body text |
+| `xl` | 20px | Small headings |
+| `2xl` | 24px | Section headings |
+| `3xl` | 30px | Page titles |
+
+## Border Radius
+
+| Name | Value | Usage |
+|------|-------|-------|
+| `rounded` | 4px | Small buttons |
+| `rounded-md` | 6px | Default buttons, inputs |
+| `rounded-lg` | 8px | Cards, large buttons |
+| `rounded-full` | 9999px | Pills, avatars |
+
+## Shadows
+
+| Name | Usage |
+|------|-------|
+| `shadow-sm` | Cards, subtle elevation |
+| `shadow` | Dropdowns, popovers |
+| `shadow-lg` | Modals, dialogs |
+
+## Using Tokens
+
+### In Tailwind Classes
+
+```tsx
+<div className="bg-background text-foreground p-4 rounded-lg shadow-sm">
+  Content
+</div>
+```
+
+### With CSS Variables
+
+```css
+.custom-element {
+  background: var(--color-background);
+  color: var(--color-foreground);
+}
+```

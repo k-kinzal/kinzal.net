@@ -1,0 +1,168 @@
+# Prop Naming Conventions
+
+This guide documents the standard prop naming conventions used throughout the Design System.
+
+## Boolean Props
+
+### State Indicators
+
+| Pattern | Usage | Example |
+|---------|-------|---------|
+| `active` | Current/selected state in navigation | `<TabItem active>` |
+| `disabled` | Interaction disabled | `<Button disabled>` |
+| `loading` | Loading state | `<Button loading>` |
+
+### Visibility
+
+| Pattern | Usage | Example |
+|---------|-------|---------|
+| `open` | Expandable element state | `<Accordion open>` |
+| `visible` | Display state | `<Tooltip visible>` |
+
+## Variant Props
+
+### Visual Variants
+
+Components use consistent variant naming based on their purpose:
+
+**Button**:
+```tsx
+// Default: primary (emphasized action)
+variant?: "primary" | "secondary" | "ghost" | "outline";
+```
+
+**IconButton**:
+```tsx
+// Default: primary (emphasized action)
+variant?: "primary" | "secondary" | "ghost";
+```
+
+**Badge**:
+```tsx
+// Default: default (neutral appearance)
+variant?: "default" | "primary" | "secondary" | "outline";
+```
+
+**Card**:
+```tsx
+// Default: default (neutral appearance)
+variant?: "default" | "outline" | "ghost";
+```
+
+**Semantic Components** (Alert):
+```tsx
+// Default: info (status-based variants)
+variant?: "info" | "success" | "warning" | "error";
+```
+
+**Navigation Components** (TabList):
+```tsx
+// Default: default (style-based variants)
+variant?: "default" | "pills";
+```
+
+### Variant Naming Guidelines
+
+| Variant | Usage |
+|---------|-------|
+| `default` | Neutral, low-emphasis appearance |
+| `primary` | Brand-colored, high-emphasis |
+| `secondary` | Muted background, medium-emphasis |
+| `ghost` | Transparent background, minimal style |
+| `outline` | Border only, no background fill |
+
+### Size Props
+
+```tsx
+// Standard size scale
+size?: "sm" | "md" | "lg" | "xl";
+```
+
+### Spacing Props
+
+```tsx
+// Standard gap/padding scale
+gap?: "none" | "xs" | "sm" | "md" | "lg" | "xl";
+padding?: "none" | "sm" | "md" | "lg";
+```
+
+### Enum Props
+
+CSS プロパティに対応する props は、文字列リテラル型を使用します。
+Boolean ショートハンドは提供しません。
+
+**Navbar / Footer**:
+```tsx
+// position は文字列リテラル型で指定
+position?: "fixed" | "sticky" | "static";
+
+// 正しい使用法
+<Navbar position="fixed">...</Navbar>
+
+// 誤り - boolean 形式は使用できません
+// <Navbar fixed={true}>...</Navbar>
+```
+
+**設計方針**: Boolean props は状態（`active`, `disabled`, `loading`）に限定し、
+CSS プロパティに対応する props は文字列リテラル型で明示的に指定する規約です。
+
+## Event Handler Props
+
+| Pattern | Usage |
+|---------|-------|
+| `onClick` | Click events |
+| `onChange` | Value change events |
+| `onLoadError` | Load failure callbacks |
+| `onLoadSuccess` | Load success callbacks |
+
+## Content Props
+
+| Pattern | Usage | Example |
+|---------|-------|---------|
+| `children` | Primary content | Standard React pattern |
+| `fallback` | Fallback content | `<Avatar fallback="JD">` |
+| `placeholder` | Placeholder text | `<Input placeholder="...">` |
+
+## ARIA Props
+
+Always include appropriate ARIA attributes:
+
+```tsx
+// Role
+role="tab" | "tablist" | "navigation" | "alert"
+
+// State
+aria-selected={active}
+aria-current={active ? "page" : undefined}
+aria-label="Description"
+aria-hidden={true}
+
+// Relationships
+aria-controls="panel-id"
+aria-labelledby="label-id"
+```
+
+## Compound Components
+
+Use dot notation for compound component patterns:
+
+```tsx
+<Card padding="none">
+  <Card.Header>Title</Card.Header>
+  <Card.Body>Content</Card.Body>
+  <Card.Footer>Actions</Card.Footer>
+</Card>
+```
+
+## Type Export Conventions
+
+Always export Props types with the component:
+
+```tsx
+// Component file
+export interface ButtonProps { ... }
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(...);
+
+// Index file
+export { Button, type ButtonProps } from "./Button";
+```

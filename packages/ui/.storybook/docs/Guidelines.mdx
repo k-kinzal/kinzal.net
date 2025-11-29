@@ -1,0 +1,240 @@
+# Design Guidelines
+
+Best practices for using the design system effectively.
+
+---
+
+## Component Usage
+
+### Do's and Don'ts
+
+#### Button
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+  <div>
+    **Do**
+    - Use `primary` for main actions (1 per section)
+    - Use `secondary` or `ghost` for secondary actions
+    - Provide clear, action-oriented labels
+    - Use consistent sizing within a group
+  </div>
+  <div>
+    **Don't**
+    - Don't use multiple `primary` buttons in one area
+    - Don't use vague labels like "Click here"
+    - Don't mix different sizes in a button group
+    - Don't disable buttons without explanation
+  </div>
+</div>
+
+```tsx
+// Good
+<Button variant="primary">Save Changes</Button>
+<Button variant="ghost">Cancel</Button>
+
+// Avoid
+<Button variant="primary">Save</Button>
+<Button variant="primary">Cancel</Button>
+```
+
+#### Typography
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+  <div>
+    **Do**
+    - Use semantic heading levels (h1 → h2 → h3)
+    - Use `size` prop to adjust visual size independently
+    - Use `muted` variant for secondary information
+  </div>
+  <div>
+    **Don't**
+    - Don't skip heading levels (h1 → h3)
+    - Don't use headings for styling purposes only
+    - Don't use all caps for body text
+  </div>
+</div>
+
+```tsx
+// Good - Semantic hierarchy with visual adjustment
+<Heading level={1} size="2xl">Page Title</Heading>
+<Heading level={2} size="lg">Section</Heading>
+<Heading level={3} size="md">Subsection</Heading>
+
+// Avoid - Skipping levels
+<Heading level={1}>Title</Heading>
+<Heading level={3}>Subsection</Heading>
+```
+
+#### Card
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+  <div>
+    **Do**
+    - Use `padding="none"` when adding images that bleed to edges
+    - Group related content within a single card
+    - Use consistent card variants in a grid
+  </div>
+  <div>
+    **Don't**
+    - Don't nest cards within cards
+    - Don't use cards for single pieces of content
+    - Don't mix card variants in a single grid
+  </div>
+</div>
+
+#### Icons
+
+<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
+  <div>
+    **Do**
+    - Always provide `aria-label` on IconButton
+    - Use icons to support text, not replace it
+    - Keep icon sizes consistent within a context
+  </div>
+  <div>
+    **Don't**
+    - Don't use icons without labels for important actions
+    - Don't use decorative icons that add no meaning
+    - Don't mix icon libraries
+  </div>
+</div>
+
+```tsx
+// Good
+<IconButton aria-label="Search" variant="ghost">
+  <Icon icon={Search} size={20} />
+</IconButton>
+
+// Avoid - Missing aria-label
+<IconButton>
+  <Icon icon={Search} size={20} />
+</IconButton>
+```
+
+---
+
+## Layout Patterns
+
+### Page Structure
+
+```tsx
+<ThemeProvider>
+  {/* position プロパティ: "fixed" | "sticky" | "static" */}
+  <Navbar position="fixed">...</Navbar>
+
+  <Container className="pt-16 pb-12">
+    <Stack gap="xl">
+      <Heading level={1}>Page Title</Heading>
+      {/* Content */}
+    </Stack>
+  </Container>
+
+  <Footer position="fixed">...</Footer>
+</ThemeProvider>
+```
+
+**Navbar / Footer の position プロパティ**:
+
+| 値 | 動作 |
+|----|------|
+| `"static"` | 通常のドキュメントフロー（デフォルト） |
+| `"fixed"` | ビューポートに固定 |
+| `"sticky"` | スクロール時に固定 |
+
+```tsx
+// 正しい使用法
+<Navbar position="fixed">...</Navbar>
+
+// 誤り - fixed={true} は使用できません
+// <Navbar fixed={true}>...</Navbar>
+```
+
+### Grid Layouts
+
+Grid コンポーネントの `cols` プロパティは基本カラム数を設定します。
+レスポンシブ対応には `className` で Tailwind のブレークポイント修飾子を使用してください。
+
+```tsx
+// Responsive grid - className でブレークポイント別のカラム数を指定
+<Grid cols={2} className="sm:grid-cols-4 md:grid-cols-6" gap="md">
+  {items.map(item => <Card key={item.id}>...</Card>)}
+</Grid>
+```
+
+**設計意図**: `className` 方式により、任意のブレークポイント・任意のカラム数の組み合わせに対応できます。
+
+| ユースケース | 推奨パターン |
+|-------------|-------------|
+| 画像ギャラリー | `cols={2} className="sm:grid-cols-4 md:grid-cols-6"` |
+| カードレイアウト | `cols={1} className="md:grid-cols-2 lg:grid-cols-3"` |
+| ダッシュボード | `cols={1} className="sm:grid-cols-2 xl:grid-cols-4"` |
+
+### Spacing Consistency
+
+Use the spacing scale consistently:
+
+| Context | Recommended |
+|---------|-------------|
+| Between sections | `xl` (32px) |
+| Between related items | `md` (16px) |
+| Within components | `sm` (8px) |
+| Tight groups | `xs` (4px) |
+
+---
+
+## Accessibility Checklist
+
+### Required
+
+- [ ] All interactive elements are keyboard accessible
+- [ ] Focus states are visible
+- [ ] Color contrast meets WCAG AA (4.5:1 for text)
+- [ ] Images have descriptive `alt` text
+- [ ] Form inputs have associated labels
+- [ ] IconButtons have `aria-label`
+
+### Recommended
+
+- [ ] Headings follow semantic order
+- [ ] Links are descriptive (not "click here")
+- [ ] Animations respect `prefers-reduced-motion`
+- [ ] Touch targets are at least 44x44px
+
+---
+
+## Dark Mode
+
+The design system automatically supports dark mode via the `ThemeProvider`.
+
+### Best Practices
+
+1. **Test in both modes** - Always verify your UI in light and dark mode
+2. **Use semantic colors** - Use `foreground`, `background` instead of hardcoded colors
+3. **Avoid pure black/white** - The system uses softer tones for less eye strain
+
+```tsx
+// Good - Uses semantic colors
+<div className="bg-background text-foreground">
+
+// Avoid - Hardcoded colors
+<div className="bg-white text-black">
+```
+
+---
+
+## Naming Conventions
+
+### Props
+
+| Type | Convention | Example |
+|------|------------|---------|
+| Boolean state | Adjective | `active`, `disabled`, `current` |
+| Appearance | `variant` | `variant="primary"` |
+| Dimension | `size` | `size="md"` |
+| Layout | Descriptive | `direction`, `gap`, `align` |
+
+### Component Names
+
+- PascalCase for components
+- Compound: `Card`, `Card.Header` (future)
+- Grouped: `TabList`, `TabItem`

@@ -1,0 +1,68 @@
+# @kinzal-net/ui
+
+A flexible design system built with React and Tailwind CSS.
+
+## Features
+
+- **30+ Reusable Components** - Primitives, typography, layout, navigation, feedback, data display, media, and overlay
+- **Dark Mode Support** - Built-in theme switching with system preference detection
+- **Accessible** - WCAG 2.1 compliant with proper ARIA attributes
+- **TypeScript** - Full type definitions with TSDoc documentation
+- **Tailwind CSS** - Customizable via Tailwind configuration
+
+## Installation
+
+```bash
+npm install @kinzal-net/ui
+```
+
+## Setup
+
+### 1. Import styles
+
+```tsx
+import "@kinzal-net/ui/styles";
+```
+
+### 2. Wrap with ThemeProvider (optional)
+
+```tsx
+import { ThemeProvider } from "@kinzal-net/ui";
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="system">
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+## Quick Start
+
+```tsx
+import { Button, Card, Heading, Text } from "@kinzal-net/ui";
+
+function Example() {
+  return (
+    <Card padding="md">
+      <Heading level={2} size="lg">Welcome</Heading>
+      <Text variant="muted">Get started with the design system.</Text>
+      <Button variant="primary">Get Started</Button>
+    </Card>
+  );
+}
+```
+
+## Component Categories
+
+| Category | Components |
+|----------|------------|
+| **Primitives** | Button, Icon, IconButton, Link |
+| **Typography** | Heading, Text |
+| **Layout** | Container, Grid, Stack, Footer |
+| **Navigation** | Navbar, NavBrand, NavLink, Breadcrumb, Tabs, Pagination |
+| **Feedback** | Spinner, Badge, Alert, Skeleton |
+| **Data Display** | Card, Avatar, Divider |
+| **Media** | Image, AspectRatio |
+| **Overlay** | Tooltip, Popover, DropdownMenu, Toast, Drawer |
