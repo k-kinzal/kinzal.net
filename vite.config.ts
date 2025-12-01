@@ -5,6 +5,7 @@ import { imagetools } from "vite-imagetools";
 import { faceCropPlugin } from "@kinzal-net/vite-plugin-face-crop";
 import { imageListPlugin } from "@kinzal-net/vite-plugin-image-list";
 import { imageVariantsPlugin } from "@kinzal-net/vite-plugin-image-variants";
+import compression from "vite-plugin-compression";
 
 const faceCrop = faceCropPlugin();
 
@@ -45,5 +46,38 @@ export default defineConfig(() => ({
     }),
     reactRouter(),
     tailwindcss(),
+    // Generate gzip compressed files for static assets
+    compression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 1024, // Only compress files > 1KB
+      deleteOriginFile: false,
+    }),
+    // Generate brotli compressed files for static assets
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 1024,
+      deleteOriginFile: false,
+    }),
   ],
+  build: {
+    // Enable minification with terser for better compression
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.log in production
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+      },
+      mangle: true,
+      format: {
+        comments: false, // Remove comments
+      },
+    },
+    // Optimize CSS
+    cssMinify: 'lightningcss',
+    // Enable source maps for debugging (optional, can be disabled for smaller builds)
+    sourcemap: false,
+  },
 }));

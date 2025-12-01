@@ -37,9 +37,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
           sizes="152x152"
           href="/app/images/icon-152.png"
         />
+        {/* Google Fonts optimization: preconnect for faster font loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           rel="stylesheet"
-          href="http://fonts.googleapis.com/css?family=Raleway:200"
+          href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
         />
         <Meta />
         <Links />

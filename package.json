@@ -2,6 +2,7 @@
   "name": "kinzal.net",
   "version": "1.0.0",
   "description": "Illustration portfolio of kinzal.",
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],
@@ -23,6 +24,7 @@
     "@kinzal-net/vite-plugin-face-crop": "*",
     "@playwright/test": "^1.56.1",
     "@react-router/dev": "^7.9.6",
+    "@rollup/plugin-terser": "^0.4.4",
     "@storybook/addon-docs": "^10.0.8",
     "@storybook/html-vite": "^10.0.8",
     "@tailwindcss/vite": "^4.1.17",
@@ -31,13 +33,16 @@
     "@types/react-dom": "^19.2.3",
     "glob": "^10.3.10",
     "handlebars": "^4.7.8",
+    "lightningcss": "^1.30.2",
     "lodash": "^4.17.21",
     "postcss": "^8.4.49",
     "storybook": "^10.0.8",
     "tailwindcss": "^4.1.17",
+    "terser": "^5.44.1",
     "typescript": "^5.9.3",
     "vite": "^7.2.4",
-    "vite-imagetools": "^9.0.2"
+    "vite-imagetools": "^9.0.2",
+    "vite-plugin-compression": "^0.5.1"
   },
   "dependencies": {
     "@kinzal-net/ui": "*",
