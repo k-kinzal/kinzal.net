@@ -25,7 +25,8 @@ export function ImageGallery({ images, category }: ImageGalleryProps) {
         <ImageViewer
           key={`view-${img}`}
           id={img}
-          src={`app/images/${category}/${img}`}
+          category={category}
+          filename={img}
         />
       ))}
 

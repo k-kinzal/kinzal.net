@@ -1,3 +1,12 @@
+// Virtual module declarations
+declare module 'virtual:image-list' {
+  export const imageList: Record<string, string[]>;
+}
+
+declare module 'virtual:image-variants' {
+  export const imageVariants: Record<string, Record<string, () => Promise<{ default: string }>>>;
+}
+
 // echo-js module declaration
 declare module "echo-js" {
   interface EchoOptions {

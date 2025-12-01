@@ -1,8 +1,10 @@
-import { Image, Link, Stack } from "@kinzal-net/ui";
+import { Link, Stack } from "@kinzal-net/ui";
+import { OptimizedImage } from "./OptimizedImage";
 
 interface ImageViewerProps {
   id: string;
-  src: string;
+  category: "original" | "scrap";
+  filename: string;
 }
 
 /**
@@ -14,7 +16,7 @@ interface ImageViewerProps {
  *
  * Click on image closes viewer by navigating to "#"
  */
-export function ImageViewer({ id, src }: ImageViewerProps) {
+export function ImageViewer({ id, category, filename }: ImageViewerProps) {
   return (
     <Stack
       id={id}
@@ -34,8 +36,10 @@ export function ImageViewer({ id, src }: ImageViewerProps) {
       ].join(" ")}
     >
       <Link href="#" variant="ghost" className="flex items-center justify-center max-w-full max-h-full">
-        <Image
-          src={src}
+        <OptimizedImage
+          category={category}
+          filename={filename}
+          variant="full"
           objectFit="contain"
           className={[
             // Hidden by default, shown when parent is :target

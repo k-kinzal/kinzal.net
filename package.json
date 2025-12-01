@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "dev": "react-router dev",
-    "build": "node scripts/process-images.js && react-router build",
+    "build": "react-router build",
     "preview": "vite preview --outDir build/client",
     "storybook": "npm run storybook -w @kinzal-net/ui",
     "build-storybook": "npm run build-storybook -w @kinzal-net/ui"
@@ -20,6 +20,7 @@
   "homepage": "http://kinzal.net/",
   "private": true,
   "devDependencies": {
+    "@kinzal-net/vite-plugin-face-crop": "*",
     "@playwright/test": "^1.56.1",
     "@react-router/dev": "^7.9.6",
     "@storybook/addon-docs": "^10.0.8",
@@ -32,11 +33,11 @@
     "handlebars": "^4.7.8",
     "lodash": "^4.17.21",
     "postcss": "^8.4.49",
-    "sharp": "^0.33.5",
     "storybook": "^10.0.8",
     "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-imagetools": "^9.0.2"
   },
   "dependencies": {
     "@kinzal-net/ui": "*",

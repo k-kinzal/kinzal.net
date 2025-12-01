@@ -83,25 +83,12 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
   }
 
   /**
-   * Generates the virtual module code with static imports.
+   * Generates the virtual module code with dynamic imports (lazy loading).
+   * Images are only processed when actually requested.
    */
   function generateCode(files: string[]): string {
     const lines: string[] = [];
 
-    // Generate import statements for each file × query combination
-    let importIndex = 0;
-    const importMap: Map<string, string> = new Map();
-
-    for (const file of files) {
-      for (const query of queries) {
-        const importPath = `./${file}?${query}`;
-        const importName = `__img_${importIndex++}`;
-        importMap.set(`${file}|${query}`, importName);
-        lines.push(`import ${importName} from '${importPath}';`);
-      }
-    }
-
-    lines.push('');
     lines.push('export const imageVariants = {');
 
     for (const file of files) {
@@ -110,8 +97,9 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
       lines.push(`  '${key}': {`);
 
       for (const query of queries) {
-        const importName = importMap.get(`${file}|${query}`);
-        lines.push(`    '${query}': ${importName},`);
+        const importPath = `./${file}?${query}`;
+        // Use dynamic import for lazy loading
+        lines.push(`    '${query}': () => import('${importPath}'),`);
       }
 
       lines.push('  },');

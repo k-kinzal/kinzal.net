@@ -1,17 +1,12 @@
-import fs from "fs";
-import path from "path";
 import type { Route } from "./+types/home";
 import { NewGallery } from "../components/NewGallery";
+import { imageList } from "virtual:image-list";
 
 export async function loader({}: Route.LoaderArgs) {
-  const imagesDir = path.resolve(process.cwd(), "app/images/original");
-  const files = fs
-    .readdirSync(imagesDir)
-    .filter((f: string) => !f.startsWith("."))
-    .reverse();
+  const images = [...(imageList.original ?? [])].reverse();
 
   return {
-    images: files,
+    images,
     category: "original" as const,
     year: new Date().getFullYear(),
   };

@@ -1,8 +1,9 @@
-import { Grid, Image, Link, Stack } from "@kinzal-net/ui";
+import { Grid, Link, Stack } from "@kinzal-net/ui";
+import { OptimizedImage } from "./OptimizedImage";
 
 interface ThumbnailGridProps {
   images: string[];
-  category: string;
+  category: "original" | "scrap";
 }
 
 /**
@@ -42,10 +43,10 @@ export function ThumbnailGrid({ images, category }: ThumbnailGridProps) {
             className="block p-0 m-0 border-0 bg-transparent"
             key={`thumb-${img}`}
           >
-            <Image
-              src={`app/images/${category}/${img}`}
-              width={400}
-              height={400}
+            <OptimizedImage
+              category={category}
+              filename={img}
+              variant="thumb-md"
               objectFit="cover"
               className={[
                 // Square aspect ratio
