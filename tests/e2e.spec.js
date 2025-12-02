@@ -3,24 +3,25 @@ import { test, expect } from '@playwright/test';
 test.describe('Visual Regression Tests', () => {
     test('index.html should match snapshot', async ({ page }) => {
         await page.goto('/');
+        await page.waitForSelector('[data-testid="thumbnail-grid"]');
         await expect(page).toHaveScreenshot('index.png');
     });
 
     test('original.html should match snapshot', async ({ page }) => {
         await page.goto('/original.html');
+        await page.waitForSelector('[data-testid="thumbnail-grid"]');
         await expect(page).toHaveScreenshot('original.png');
     });
 
     test('scrap.html should match snapshot', async ({ page }) => {
         await page.goto('/scrap.html');
+        await page.waitForSelector('[data-testid="thumbnail-grid"]');
         await expect(page).toHaveScreenshot('scrap.png');
     });
 
     test('image view page should match snapshot', async ({ page }) => {
         await page.goto('/original.html#img001.jpg');
-        // Wait for the image to be visible - :target works with element ID
-        // The ImageViewer has id={img} and data-testid="image-viewer"
-        await page.waitForSelector('#img001\\.jpg img', { state: 'visible' });
+        await page.waitForSelector('[data-testid="image-viewer"]');
         await expect(page).toHaveScreenshot('image-view.png');
     });
 });
@@ -52,6 +53,7 @@ test.describe('E2E Tests', () => {
 
     test('original.html content', async ({ page }) => {
         await page.goto('/original.html');
+        await page.waitForSelector('[data-testid="thumbnail-grid"]');
 
         // Check for images
         // The images are likely in a grid
@@ -65,6 +67,7 @@ test.describe('E2E Tests', () => {
 
     test('scrap.html content', async ({ page }) => {
         await page.goto('/scrap.html');
+        await page.waitForSelector('[data-testid="thumbnail-grid"]');
 
         const images = page.locator('img');
         const count = await images.count();

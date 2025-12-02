@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Stack } from "@kinzal-net/ui";
 import { ImageViewer } from "./ImageViewer";
 import { ThumbnailGrid } from "./ThumbnailGrid";
@@ -18,6 +19,15 @@ interface ImageGalleryProps {
  * - ThumbnailGrid (shows all thumbnails, slides off when an ImageViewer is targeted)
  */
 export function ImageGallery({ images, category }: ImageGalleryProps) {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Re-trigger :target by re-setting the hash
+      window.location.hash = "";
+      window.location.hash = hash;
+    }
+  }, []);
+
   return (
     <Stack className="relative w-full h-full m-0 p-0" id="content">
       {/* Image viewers - each one is positioned off-screen until :target */}
