@@ -37,7 +37,8 @@ async function loadImageSources(
   filename: string,
   variant: Variant
 ): Promise<ImageSources | null> {
-  const key = `./app/images/${category}/${filename}`;
+  // Use /app/images/ prefix (absolute from project root)
+  const key = `/app/images/${category}/${filename}`;
   const variants = imageVariants[key];
   if (!variants) return null;
 
@@ -46,18 +47,17 @@ async function loadImageSources(
   const pngQuery = buildQuery(variant, "png");
 
   try {
-    const [avifMod, webpMod, pngMod] = await Promise.all([
+    const [avif, webp, png] = await Promise.all([
       variants[avifQuery]?.(),
       variants[webpQuery]?.(),
       variants[pngQuery]?.(),
     ]);
 
-    const png = pngMod?.default;
     if (!png) return null;
 
     return {
-      avif: avifMod?.default || png,
-      webp: webpMod?.default || png,
+      avif: avif || png,
+      webp: webp || png,
       png,
     };
   } catch {

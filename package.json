@@ -7,9 +7,10 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "react-router dev",
-    "build": "react-router build",
-    "preview": "vite preview --outDir build/client",
+    "dev": "vite",
+    "build": "vite-react-ssg build && npm run postbuild",
+    "postbuild": "node -e \"const fs=require('fs'); ['original','scrap'].forEach(f => { const src='dist/'+f+'.html.html'; const dst='dist/'+f+'.html'; if(fs.existsSync(src)) { fs.renameSync(src,dst); console.log('Renamed',src,'->',dst); } });\"",
+    "preview": "vite preview",
     "storybook": "npm run storybook -w @kinzal-net/ui",
     "build-storybook": "npm run build-storybook -w @kinzal-net/ui"
   },
@@ -23,7 +24,6 @@
   "devDependencies": {
     "@kinzal-net/vite-plugin-face-crop": "*",
     "@playwright/test": "^1.56.1",
-    "@react-router/dev": "^7.9.6",
     "@rollup/plugin-terser": "^0.4.4",
     "@storybook/addon-docs": "^10.0.8",
     "@storybook/html-vite": "^10.0.8",
@@ -31,6 +31,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
     "glob": "^10.3.10",
     "handlebars": "^4.7.8",
     "lightningcss": "^1.30.2",
@@ -39,19 +40,19 @@
     "storybook": "^10.0.8",
     "tailwindcss": "^4.1.17",
     "terser": "^5.44.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "vite": "^7.2.4",
+    "vite": "^7.2.6",
     "vite-imagetools": "^9.0.2",
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "vite-react-ssg": "^0.8.9"
   },
   "dependencies": {
     "@kinzal-net/ui": "*",
-    "@react-router/node": "^7.9.6",
     "echo-js": "^1.7.3",
-    "isbot": "^5.1.32",
     "lucide-react": "^0.555.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router": "^7.9.6"
+    "react-router-dom": "^6.28.0"
   }
 }

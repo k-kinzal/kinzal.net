@@ -1,17 +1,10 @@
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "react-router";
+import { Outlet } from "react-router-dom";
+import { Head } from "vite-react-ssg";
 
-import "./styles/globals.css";
-
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout() {
   return (
-    <html lang="en">
-      <head>
+    <>
+      <Head>
         <meta charSet="utf-8" />
         <title>RakugakiYa</title>
         <meta
@@ -37,7 +30,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
           sizes="152x152"
           href="/app/images/icon-152.png"
         />
-        {/* Google Fonts optimization: preconnect for faster font loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -48,18 +40,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
         />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
+      </Head>
+      <Outlet />
+    </>
   );
-}
-
-export default function Root() {
-  return <Outlet />;
 }

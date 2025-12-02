@@ -3,7 +3,7 @@ import { glob } from 'tinyglobby';
 import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite';
 import type { ImageVariantsPluginOptions } from './types.js';
 
-export type { ImageVariantsPluginOptions, ImageVariants } from './types.js';
+export type { ImageVariantsPluginOptions, ImageVariants, ImageVariantLoader } from './types.js';
 
 const VIRTUAL_MODULE_ID = 'virtual:image-variants';
 const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
@@ -83,23 +83,76 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
   }
 
   /**
-   * Generates the virtual module code with dynamic imports (lazy loading).
-   * Images are only processed when actually requested.
+   * Extracts the base directory from a glob pattern.
+   * e.g., './app/images/**\/*.{jpg,png}' -> '/app/images'
+   */
+  function extractBaseDir(pattern: string): string {
+    // Remove leading ./ if present
+    let normalized = pattern.startsWith('./') ? pattern.slice(1) : pattern;
+    // Ensure leading /
+    if (!normalized.startsWith('/')) {
+      normalized = '/' + normalized;
+    }
+    // Find the first glob character and take the directory before it
+    const globIndex = normalized.search(/[*?{]/);
+    if (globIndex === -1) {
+      return normalized;
+    }
+    const beforeGlob = normalized.slice(0, globIndex);
+    // Remove trailing slash and filename part if any
+    const lastSlash = beforeGlob.lastIndexOf('/');
+    return lastSlash > 0 ? beforeGlob.slice(0, lastSlash) : beforeGlob;
+  }
+
+  /**
+   * Extracts extensions from a glob pattern.
+   * e.g., '**\/*.{jpg,jpeg,png}' -> 'jpg,jpeg,png'
+   */
+  function extractExtensions(pattern: string): string {
+    const match = pattern.match(/\.\{([^}]+)\}$/);
+    if (match?.[1]) {
+      return match[1];
+    }
+    // Single extension like *.jpg
+    const singleMatch = pattern.match(/\.(\w+)$/);
+    if (singleMatch?.[1]) {
+      return singleMatch[1];
+    }
+    // Default fallback
+    return 'jpg,jpeg,png';
+  }
+
+  /**
+   * Generates the virtual module code.
+   * Uses import.meta.glob for lazy loading in both dev and prod.
+   * This provides a consistent API regardless of environment.
    */
   function generateCode(files: string[]): string {
     const lines: string[] = [];
 
+    // Extract base directory and extensions from input pattern
+    const baseDir = extractBaseDir(input);
+    const extensions = extractExtensions(input);
+    const globPattern = `${baseDir}/**/*.{${extensions}}`;
+
+    // Build glob patterns for each query
+    for (let i = 0; i < queries.length; i++) {
+      const query = queries[i];
+      lines.push(`const glob${i} = import.meta.glob('${globPattern}', { query: '${query}', import: 'default' });`);
+    }
+
+    lines.push('');
     lines.push('export const imageVariants = {');
 
     for (const file of files) {
-      // Use ./ prefix for consistency
-      const key = `./${file}`;
+      // Use absolute path from project root
+      const key = `/${file}`;
       lines.push(`  '${key}': {`);
 
-      for (const query of queries) {
-        const importPath = `./${file}?${query}`;
-        // Use dynamic import for lazy loading
-        lines.push(`    '${query}': () => import('${importPath}'),`);
+      for (let i = 0; i < queries.length; i++) {
+        const query = queries[i];
+        // import.meta.glob returns () => Promise<string> for lazy loading
+        lines.push(`    '${query}': glob${i}['${key}'],`);
       }
 
       lines.push('  },');

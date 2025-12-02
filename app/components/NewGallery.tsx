@@ -37,10 +37,10 @@ export function NewGallery({
             RakugakiYa
           </NavBrand>
           <Stack direction="horizontal" gap="none" className="h-full">
-            <NavLink href="original.html" active={isOriginal} className="w-[120px] h-full font-light leading-[60px] border-l border-border">
+            <NavLink href="/original.html" active={isOriginal} className="w-[120px] h-full font-light leading-[60px] border-l border-border">
               Original
             </NavLink>
-            <NavLink href="scrap.html" active={isScrap} className="w-[120px] h-full font-light leading-[60px] border-l border-border">
+            <NavLink href="/scrap.html" active={isScrap} className="w-[120px] h-full font-light leading-[60px] border-l border-border">
               Scrap
             </NavLink>
             <NavLink href="http://about.me/kinzal" className="w-[120px] h-full font-light leading-[60px] border-l border-border">

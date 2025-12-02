@@ -19,7 +19,8 @@
 }
 
 html,
-body {
+body,
+#root {
   @apply w-full h-full;
 }
 

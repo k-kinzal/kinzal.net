@@ -32,8 +32,14 @@ export interface ImageVariantsPluginOptions {
 }
 
 /**
- * Image variants organized by file path and query.
- * Keys are file paths (e.g., './app/images/original/img001.jpg'),
- * values are objects mapping query strings to resolved URLs.
+ * Lazy loader function for image variants.
+ * Returns a Promise that resolves to the image URL.
  */
-export type ImageVariants = Record<string, Record<string, string>>;
+export type ImageVariantLoader = () => Promise<string>;
+
+/**
+ * Image variants organized by file path and query.
+ * Keys are file paths (e.g., '/app/images/original/img001.jpg'),
+ * values are objects mapping query strings to lazy loaders.
+ */
+export type ImageVariants = Record<string, Record<string, ImageVariantLoader>>;
