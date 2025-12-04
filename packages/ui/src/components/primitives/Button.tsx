@@ -15,7 +15,8 @@ const buttonVariants = cva(
         primary: "bg-primary text-foreground-inverse hover:bg-primary-700",
         secondary: "bg-background-muted text-foreground border border-border hover:bg-background",
         ghost: "text-foreground hover:bg-background-muted",
-        outline: "border border-primary text-primary hover:bg-primary hover:text-foreground-inverse",
+        outline:
+          "border border-primary text-primary hover:bg-primary hover:text-foreground-inverse",
       },
       size: {
         sm: "h-8 px-3 text-sm rounded",
@@ -34,8 +35,7 @@ const buttonVariants = cva(
  * Props for the Button component.
  */
 export interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+  extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {}
 
 /**
  * Primary interactive element for user actions.
@@ -54,11 +54,7 @@ export interface ButtonProps
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
     return (
-      <button
-        ref={ref}
-        className={cn(buttonVariants({ variant, size }), className)}
-        {...props}
-      />
+      <button ref={ref} className={cn(buttonVariants({ variant, size }), className)} {...props} />
     );
   }
 );

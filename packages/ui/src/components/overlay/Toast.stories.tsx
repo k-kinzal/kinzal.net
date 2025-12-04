@@ -25,11 +25,7 @@ export const Default: Story = {
 export const Variants: Story = {
   render: () => (
     <Stack gap="md" className="w-80">
-      <Toast
-        variant="default"
-        title="Default"
-        description="This is a default notification."
-      />
+      <Toast variant="default" title="Default" description="This is a default notification." />
       <Toast
         variant="success"
         title="Success"
@@ -40,16 +36,8 @@ export const Variants: Story = {
         title="Warning"
         description="Please review your changes before proceeding."
       />
-      <Toast
-        variant="error"
-        title="Error"
-        description="Something went wrong. Please try again."
-      />
-      <Toast
-        variant="info"
-        title="Info"
-        description="A new version is available for download."
-      />
+      <Toast variant="error" title="Error" description="Something went wrong. Please try again." />
+      <Toast variant="info" title="Info" description="A new version is available for download." />
     </Stack>
   ),
 };
@@ -86,11 +74,7 @@ export const LongContent: Story = {
     title: "Update Available",
     description:
       "A new software update is available. The update includes bug fixes and performance improvements. Please save your work before updating.",
-    action: (
-      <Button size="sm">
-        Update
-      </Button>
-    ),
+    action: <Button size="sm">Update</Button>,
   },
   decorators: [
     (Story) => (
@@ -197,34 +181,28 @@ export const Positions: Story = {
 
       return (
         <Stack gap="md">
-          <p className="text-sm text-foreground-muted">
+          <p className="text-foreground-muted text-sm">
             Click buttons to show toasts in different positions
           </p>
           <Stack direction="horizontal" gap="sm" className="flex-wrap">
             <Button
               variant="outline"
               size="sm"
-              onClick={() =>
-                addToast({ title: "Top Left", variant: "info" })
-              }
+              onClick={() => addToast({ title: "Top Left", variant: "info" })}
             >
               Top Left
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() =>
-                addToast({ title: "Top Center", variant: "info" })
-              }
+              onClick={() => addToast({ title: "Top Center", variant: "info" })}
             >
               Top Center
             </Button>
             <Button
               variant="outline"
               size="sm"
-              onClick={() =>
-                addToast({ title: "Top Right", variant: "info" })
-              }
+              onClick={() => addToast({ title: "Top Right", variant: "info" })}
             >
               Top Right
             </Button>

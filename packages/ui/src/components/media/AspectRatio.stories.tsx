@@ -26,13 +26,7 @@ export const Square: Story = {
   args: {
     ratio: "square",
     className: "w-48 bg-background-muted",
-    children: (
-      <Image
-        src={placeholderImage}
-        alt="Square image"
-        className="w-full h-full"
-      />
-    ),
+    children: <Image src={placeholderImage} alt="Square image" className="h-full w-full" />,
   },
 };
 
@@ -44,7 +38,7 @@ export const Video: Story = {
       <Image
         src="https://picsum.photos/640/360"
         alt="Video aspect image"
-        className="w-full h-full"
+        className="h-full w-full"
       />
     ),
   },
@@ -55,11 +49,7 @@ export const Portrait: Story = {
     ratio: "portrait",
     className: "w-48 bg-background-muted",
     children: (
-      <Image
-        src="https://picsum.photos/300/400"
-        alt="Portrait image"
-        className="w-full h-full"
-      />
+      <Image src="https://picsum.photos/300/400" alt="Portrait image" className="h-full w-full" />
     ),
   },
 };
@@ -69,45 +59,29 @@ export const Wide: Story = {
     ratio: "wide",
     className: "w-64 bg-background-muted",
     children: (
-      <Image
-        src="https://picsum.photos/630/270"
-        alt="Wide image"
-        className="w-full h-full"
-      />
+      <Image src="https://picsum.photos/630/270" alt="Wide image" className="h-full w-full" />
     ),
   },
 };
 
 export const AllRatios: Story = {
   render: () => (
-    <div className="flex gap-4 items-start">
+    <div className="flex items-start gap-4">
       <div className="text-center">
-        <AspectRatio ratio="square" className="w-24 bg-background-muted">
-          <Image
-            src={placeholderImage}
-            alt="Square"
-            className="w-full h-full"
-          />
+        <AspectRatio ratio="square" className="bg-background-muted w-24">
+          <Image src={placeholderImage} alt="Square" className="h-full w-full" />
         </AspectRatio>
         <span className="text-sm">Square (1:1)</span>
       </div>
       <div className="text-center">
-        <AspectRatio ratio="video" className="w-32 bg-background-muted">
-          <Image
-            src="https://picsum.photos/640/360"
-            alt="Video"
-            className="w-full h-full"
-          />
+        <AspectRatio ratio="video" className="bg-background-muted w-32">
+          <Image src="https://picsum.photos/640/360" alt="Video" className="h-full w-full" />
         </AspectRatio>
         <span className="text-sm">Video (16:9)</span>
       </div>
       <div className="text-center">
-        <AspectRatio ratio="portrait" className="w-24 bg-background-muted">
-          <Image
-            src="https://picsum.photos/300/400"
-            alt="Portrait"
-            className="w-full h-full"
-          />
+        <AspectRatio ratio="portrait" className="bg-background-muted w-24">
+          <Image src="https://picsum.photos/300/400" alt="Portrait" className="h-full w-full" />
         </AspectRatio>
         <span className="text-sm">Portrait (3:4)</span>
       </div>

@@ -36,10 +36,7 @@ export const Placements: Story = {
   render: () => (
     <Stack gap="lg" align="center" className="p-16">
       <Stack direction="horizontal" gap="sm">
-        <Popover
-          content={<div className="p-2">Top Start</div>}
-          placement="top-start"
-        >
+        <Popover content={<div className="p-2">Top Start</div>} placement="top-start">
           <Button variant="outline" size="sm">
             Top Start
           </Button>
@@ -49,10 +46,7 @@ export const Placements: Story = {
             Top
           </Button>
         </Popover>
-        <Popover
-          content={<div className="p-2">Top End</div>}
-          placement="top-end"
-        >
+        <Popover content={<div className="p-2">Top End</div>} placement="top-end">
           <Button variant="outline" size="sm">
             Top End
           </Button>
@@ -71,10 +65,7 @@ export const Placements: Story = {
         </Popover>
       </Stack>
       <Stack direction="horizontal" gap="sm">
-        <Popover
-          content={<div className="p-2">Bottom Start</div>}
-          placement="bottom-start"
-        >
+        <Popover content={<div className="p-2">Bottom Start</div>} placement="bottom-start">
           <Button variant="outline" size="sm">
             Bottom Start
           </Button>
@@ -84,10 +75,7 @@ export const Placements: Story = {
             Bottom
           </Button>
         </Popover>
-        <Popover
-          content={<div className="p-2">Bottom End</div>}
-          placement="bottom-end"
-        >
+        <Popover content={<div className="p-2">Bottom End</div>} placement="bottom-end">
           <Button variant="outline" size="sm">
             Bottom End
           </Button>
@@ -103,16 +91,16 @@ export const UserMenu: Story = {
       placement="bottom-end"
       content={
         <Stack gap="none" className="w-48 py-1">
-          <button className="flex items-center gap-2 px-4 py-2 text-sm text-left hover:bg-background-muted">
+          <button className="hover:bg-background-muted flex items-center gap-2 px-4 py-2 text-left text-sm">
             <Icon icon={User} size={16} />
             Profile
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 text-sm text-left hover:bg-background-muted">
+          <button className="hover:bg-background-muted flex items-center gap-2 px-4 py-2 text-left text-sm">
             <Icon icon={Settings} size={16} />
             Settings
           </button>
           <Divider />
-          <button className="flex items-center gap-2 px-4 py-2 text-sm text-left text-red-600 hover:bg-background-muted">
+          <button className="hover:bg-background-muted flex items-center gap-2 px-4 py-2 text-left text-sm text-red-600">
             <Icon icon={LogOut} size={16} />
             Sign out
           </button>
@@ -136,7 +124,7 @@ function ControlledDemo() {
     <Stack gap="md" align="center">
       <Popover
         content={
-          <Stack gap="sm" className="p-4 w-64">
+          <Stack gap="sm" className="w-64 p-4">
             <Text className="font-medium">Controlled Popover</Text>
             <Text size="sm" className="text-foreground-muted">
               This popover is controlled externally.
@@ -165,7 +153,7 @@ export const WithForm: Story = {
     <Popover
       placement="bottom-start"
       content={
-        <Stack gap="md" className="p-4 w-72">
+        <Stack gap="md" className="w-72 p-4">
           <Text className="font-medium">Filter Options</Text>
           <Stack gap="sm">
             <label className="flex items-center gap-2 text-sm">
@@ -197,13 +185,11 @@ export const WithIconButton: Story = {
       placement="bottom-end"
       content={
         <Stack gap="none" className="w-40 py-1">
-          <button className="px-4 py-2 text-sm text-left hover:bg-background-muted">
-            Edit
-          </button>
-          <button className="px-4 py-2 text-sm text-left hover:bg-background-muted">
+          <button className="hover:bg-background-muted px-4 py-2 text-left text-sm">Edit</button>
+          <button className="hover:bg-background-muted px-4 py-2 text-left text-sm">
             Duplicate
           </button>
-          <button className="px-4 py-2 text-sm text-left text-red-600 hover:bg-background-muted">
+          <button className="hover:bg-background-muted px-4 py-2 text-left text-sm text-red-600">
             Delete
           </button>
         </Stack>

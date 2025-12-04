@@ -27,13 +27,7 @@ export interface IconProps extends LucideProps {
  */
 
 export function Icon({ icon: IconComponent, className, ...props }: IconProps) {
-  return (
-    <IconComponent
-      className={cn("shrink-0", className)}
-      aria-hidden="true"
-      {...props}
-    />
-  );
+  return <IconComponent className={cn("shrink-0", className)} aria-hidden="true" {...props} />;
 }
 
 Icon.displayName = "Icon";

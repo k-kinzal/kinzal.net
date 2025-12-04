@@ -2,31 +2,27 @@ import { forwardRef, type HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
-const skeletonVariants = cva(
-  "animate-pulse bg-background-muted",
-  {
-    variants: {
-      variant: {
-        /** Rectangular shape (default) */
-        default: "rounded-md",
-        /** Circular shape for avatars */
-        circular: "rounded-full",
-        /** Text-like shape with smaller height */
-        text: "rounded h-4",
-      },
+const skeletonVariants = cva("animate-pulse bg-background-muted", {
+  variants: {
+    variant: {
+      /** Rectangular shape (default) */
+      default: "rounded-md",
+      /** Circular shape for avatars */
+      circular: "rounded-full",
+      /** Text-like shape with smaller height */
+      text: "rounded h-4",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 /**
  * Props for the Skeleton component.
  */
 export interface SkeletonProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof skeletonVariants> {
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof skeletonVariants> {
   /**
    * Width of the skeleton. Can be any CSS width value.
    * @defaultValue "100%"

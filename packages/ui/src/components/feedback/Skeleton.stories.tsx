@@ -52,17 +52,17 @@ export const Text: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-4 w-64">
+    <div className="flex w-64 flex-col gap-4">
       <div className="flex items-center gap-2">
-        <span className="text-sm w-20">Default:</span>
+        <span className="w-20 text-sm">Default:</span>
         <Skeleton width={120} height={20} />
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-sm w-20">Circular:</span>
+        <span className="w-20 text-sm">Circular:</span>
         <Skeleton variant="circular" width={40} height={40} />
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-sm w-20">Text:</span>
+        <span className="w-20 text-sm">Text:</span>
         <Skeleton variant="text" width="100%" />
       </div>
     </div>
@@ -74,7 +74,7 @@ export const AllVariants: Story = {
  */
 export const CardSkeleton: Story = {
   render: () => (
-    <div className="w-72 p-4 border rounded-lg space-y-3">
+    <div className="w-72 space-y-3 rounded-lg border p-4">
       <div className="flex items-center gap-3">
         <Skeleton variant="circular" width={40} height={40} />
         <div className="flex-1 space-y-2">

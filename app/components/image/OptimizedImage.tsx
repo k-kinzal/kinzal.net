@@ -1,10 +1,6 @@
 import { Image } from "@kinzal-net/ui";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
-import {
-  useImageVariant,
-  IMAGE_VARIANTS,
-  type ImageVariant,
-} from "../../hooks/useImageVariant";
+import { useImageVariant, IMAGE_VARIANTS, type ImageVariant } from "../../hooks/useImageVariant";
 import { ImagePlaceholder } from "./ImagePlaceholder";
 
 export { IMAGE_VARIANTS, type ImageVariant };

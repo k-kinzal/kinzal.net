@@ -29,8 +29,8 @@ export const Default: Story = {
   args: {
     className: "h-16 px-4",
     children: (
-      <div className="h-full flex items-center justify-between">
-        <NavBrand href="/" className="font-bold text-xl">
+      <div className="flex h-full items-center justify-between">
+        <NavBrand href="/" className="text-xl font-bold">
           Brand
         </NavBrand>
         <nav className="flex items-center gap-1">
@@ -54,8 +54,8 @@ export const Fixed: Story = {
     position: "fixed",
     className: "h-16 px-4",
     children: (
-      <div className="h-full flex items-center justify-between">
-        <NavBrand href="/" className="font-bold text-xl">
+      <div className="flex h-full items-center justify-between">
+        <NavBrand href="/" className="text-xl font-bold">
           Brand
         </NavBrand>
         <nav className="flex items-center gap-1">
@@ -76,8 +76,8 @@ export const Sticky: Story = {
     position: "sticky",
     className: "h-16 px-4",
     children: (
-      <div className="h-full flex items-center justify-between">
-        <NavBrand href="/" className="font-bold text-xl">
+      <div className="flex h-full items-center justify-between">
+        <NavBrand href="/" className="text-xl font-bold">
           Brand
         </NavBrand>
         <nav className="flex items-center gap-1">

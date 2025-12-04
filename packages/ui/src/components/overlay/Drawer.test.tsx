@@ -2,14 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
-import {
-  Drawer,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerBody,
-  DrawerFooter,
-  DrawerClose,
-} from "./Drawer";
+import { Drawer, DrawerHeader, DrawerTitle, DrawerBody, DrawerFooter, DrawerClose } from "./Drawer";
 
 describe("Drawer", () => {
   it("renders when open", () => {

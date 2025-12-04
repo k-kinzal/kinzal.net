@@ -3,11 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
 const spinnerVariants = cva(
-  [
-    "inline-block animate-spin rounded-full",
-    "border-foreground-muted",
-    "border-t-primary",
-  ],
+  ["inline-block animate-spin rounded-full", "border-foreground-muted", "border-t-primary"],
   {
     variants: {
       size: {
@@ -26,8 +22,7 @@ const spinnerVariants = cva(
  * Props for the Spinner component.
  */
 export interface SpinnerProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof spinnerVariants> {
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof spinnerVariants> {
   /**
    * Accessible label for screen readers.
    * @defaultValue "Loading"

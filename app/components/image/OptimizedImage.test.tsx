@@ -18,26 +18,20 @@ describe("OptimizedImage", () => {
   });
 
   it("applies className to placeholder", () => {
-    const { container } = render(
-      <OptimizedImage {...defaultProps} className="custom-class" />
-    );
+    const { container } = render(<OptimizedImage {...defaultProps} className="custom-class" />);
 
     const placeholder = container.firstChild as HTMLElement;
     expect(placeholder).toHaveClass("custom-class");
   });
 
   it("renders with different category", () => {
-    const { container } = render(
-      <OptimizedImage {...defaultProps} category="scrap" />
-    );
+    const { container } = render(<OptimizedImage {...defaultProps} category="scrap" />);
 
     expect(container.firstChild).toBeInTheDocument();
   });
 
   it("renders with full variant", () => {
-    const { container } = render(
-      <OptimizedImage {...defaultProps} variant="full" />
-    );
+    const { container } = render(<OptimizedImage {...defaultProps} variant="full" />);
 
     expect(container.firstChild).toBeInTheDocument();
   });

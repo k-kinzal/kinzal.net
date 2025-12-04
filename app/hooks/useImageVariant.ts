@@ -8,8 +8,8 @@ export const IMAGE_VARIANTS = {
   "thumb-sm": "faceCrop&w=200&h=200&fit=cover",
   "thumb-md": "faceCrop&w=400&h=400&fit=cover",
   "thumb-lg": "faceCrop&w=600&h=600&fit=cover",
-  "face": "faceCrop&w=200&h=200&fit=cover",
-  "full": "w=1920&fit=inside",
+  face: "faceCrop&w=200&h=200&fit=cover",
+  full: "w=1920&fit=inside",
 } as const;
 
 export type ImageVariant = keyof typeof IMAGE_VARIANTS;
@@ -59,20 +59,19 @@ async function loadImageSources(
   const fallbackQuery = buildQuery(variant, "png");
 
   try {
-    // With import: 'default', the glob returns the default export directly
-    const [avif, webp, fallback] = await Promise.all([
+    const [avifResult, webpResult, fallbackResult] = await Promise.all([
       variants[avifQuery]?.(),
       variants[webpQuery]?.(),
       variants[fallbackQuery]?.(),
     ]);
 
-    if (!fallback) return null;
+    if (!fallbackResult) return null;
 
-    return {
-      avif: avif || fallback,
-      webp: webp || fallback,
-      fallback,
-    };
+    const fallback = fallbackResult.default;
+    const avif = avifResult?.default || fallback;
+    const webp = webpResult?.default || fallback;
+
+    return { avif, webp, fallback };
   } catch {
     return null;
   }

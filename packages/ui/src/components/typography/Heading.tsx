@@ -7,24 +7,21 @@ import { cn } from "@/utils/cn";
  */
 export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
-const headingVariants = cva(
-  "text-foreground",
-  {
-    variants: {
-      size: {
-        xs: "text-sm font-semibold",
-        sm: "text-base font-semibold",
-        md: "text-lg font-semibold",
-        lg: "text-xl font-bold",
-        xl: "text-2xl font-bold",
-        "2xl": "text-3xl font-bold",
-      },
+const headingVariants = cva("text-foreground", {
+  variants: {
+    size: {
+      xs: "text-sm font-semibold",
+      sm: "text-base font-semibold",
+      md: "text-lg font-semibold",
+      lg: "text-xl font-bold",
+      xl: "text-2xl font-bold",
+      "2xl": "text-3xl font-bold",
     },
-    defaultVariants: {
-      size: "xl",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "xl",
+  },
+});
 
 const levelToSize: Record<HeadingLevel, VariantProps<typeof headingVariants>["size"]> = {
   1: "2xl",
@@ -39,8 +36,7 @@ const levelToSize: Record<HeadingLevel, VariantProps<typeof headingVariants>["si
  * Props for the Heading component.
  */
 export interface HeadingProps
-  extends HTMLAttributes<HTMLHeadingElement>,
-    Omit<VariantProps<typeof headingVariants>, "size"> {
+  extends HTMLAttributes<HTMLHeadingElement>, Omit<VariantProps<typeof headingVariants>, "size"> {
   /**
    * The heading level (1-6), which determines the HTML element (h1-h6).
    * @defaultValue 2

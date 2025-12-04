@@ -1,10 +1,13 @@
-import type { FaceRect } from './types.js';
-import type { Logger } from 'imagetools-core';
-import { setModelCacheDir } from './model-downloader.js';
+import type { FaceRect } from "./types.js";
+import type { Logger } from "imagetools-core";
+import { setModelCacheDir } from "./model-downloader.js";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let animedetectFn: ((imagePath: string) => Promise<any>) | false | null = null;
-let yoloDetectorFn: ((imagePath: string, logger: Logger) => Promise<FaceRect | null>) | false | null = null;
+let yoloDetectorFn:
+  | ((imagePath: string, logger: Logger) => Promise<FaceRect | null>)
+  | false
+  | null = null;
 
 let detectionMutex: Promise<void> = Promise.resolve();
 
@@ -21,7 +24,7 @@ export function setCacheDir(dir: string): void {
 async function initAnimedetect(): Promise<typeof animedetectFn> {
   if (animedetectFn === null) {
     try {
-      const mod = await import('animedetect');
+      const mod = await import("animedetect");
       animedetectFn = mod.animedetect;
     } catch {
       animedetectFn = false;
@@ -33,7 +36,7 @@ async function initAnimedetect(): Promise<typeof animedetectFn> {
 async function initYOLODetector(logger: Logger): Promise<typeof yoloDetectorFn> {
   if (yoloDetectorFn === null) {
     try {
-      const mod = await import('./yolo-face-detector.js');
+      const mod = await import("./yolo-face-detector.js");
       yoloDetectorFn = mod.detectAnimeFaceYOLO;
     } catch (e) {
       const message = e instanceof Error ? e.message : String(e);
@@ -77,7 +80,7 @@ async function detectWithAnimedetect(imagePath: string): Promise<FaceRect | null
       return null;
     } catch (e) {
       const message = e instanceof Error ? e.message : String(e);
-      if (message.includes('cv.Mat is not a constructor') && retryCount < 1) {
+      if (message.includes("cv.Mat is not a constructor") && retryCount < 1) {
         return runDetection(retryCount + 1);
       }
       throw e;

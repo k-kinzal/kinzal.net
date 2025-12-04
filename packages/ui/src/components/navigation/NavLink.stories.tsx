@@ -27,7 +27,7 @@ const meta: Meta<typeof NavLink> = {
   },
   decorators: [
     (Story) => (
-      <div className="h-16 bg-background flex items-center px-4">
+      <div className="bg-background flex h-16 items-center px-4">
         <Story />
       </div>
     ),

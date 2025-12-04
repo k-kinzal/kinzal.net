@@ -2,34 +2,30 @@ import { forwardRef, useState, type ImgHTMLAttributes, type SyntheticEvent } fro
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
-const avatarVariants = cva(
-  "bg-background-muted",
-  {
-    variants: {
-      size: {
-        sm: "h-8 w-8 text-xs",
-        md: "h-10 w-10 text-sm",
-        lg: "h-12 w-12 text-base",
-        xl: "h-16 w-16 text-lg",
-      },
-      shape: {
-        circle: "rounded-full",
-        square: "rounded-md",
-      },
+const avatarVariants = cva("bg-background-muted", {
+  variants: {
+    size: {
+      sm: "h-8 w-8 text-xs",
+      md: "h-10 w-10 text-sm",
+      lg: "h-12 w-12 text-base",
+      xl: "h-16 w-16 text-lg",
     },
-    defaultVariants: {
-      size: "md",
-      shape: "circle",
+    shape: {
+      circle: "rounded-full",
+      square: "rounded-md",
     },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+    shape: "circle",
+  },
+});
 
 /**
  * Props for the Avatar component.
  */
 export interface AvatarProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, "size">,
-    VariantProps<typeof avatarVariants> {
+  extends Omit<ImgHTMLAttributes<HTMLImageElement>, "size">, VariantProps<typeof avatarVariants> {
   /**
    * Fallback text to display when image fails to load (usually initials).
    */

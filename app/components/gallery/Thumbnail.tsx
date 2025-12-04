@@ -30,7 +30,7 @@ export function Thumbnail({ filename, category, onSelect }: ThumbnailProps) {
     <Link
       href={`#${filename}`}
       variant="ghost"
-      className="block p-0 m-0 border-0 bg-transparent"
+      className="m-0 block border-0 bg-transparent p-0"
       onClick={handleClick}
     >
       <OptimizedImage
@@ -38,7 +38,7 @@ export function Thumbnail({ filename, category, onSelect }: ThumbnailProps) {
         filename={filename}
         variant="thumb-md"
         objectFit="cover"
-        className="w-full aspect-square bg-white transition-all duration-thumbnail backface-hidden transform-gpu"
+        className="duration-thumbnail aspect-square w-full transform-gpu bg-white transition-all backface-hidden"
       />
     </Link>
   );

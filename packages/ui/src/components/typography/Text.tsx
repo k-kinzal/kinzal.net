@@ -55,21 +55,13 @@ const variantClasses = {
  * ```
  */
 export const Text = forwardRef<HTMLParagraphElement, TextProps>(
-  (
-    { className, size = "md", variant = "default", as = "p", children, ...props },
-    ref
-  ) => {
+  ({ className, size = "md", variant = "default", as = "p", children, ...props }, ref) => {
     const Tag = as;
 
     return (
       <Tag
         ref={ref}
-        className={cn(
-          sizeClasses[size],
-          variantClasses[variant],
-          "leading-relaxed",
-          className
-        )}
+        className={cn(sizeClasses[size], variantClasses[variant], "leading-relaxed", className)}
         {...props}
       >
         {children}

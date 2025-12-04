@@ -34,7 +34,7 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
       <div
         ref={ref}
         className={cn(
-          "w-full mx-auto px-4",
+          "mx-auto w-full px-4",
           {
             "max-w-7xl": !fluid,
           },

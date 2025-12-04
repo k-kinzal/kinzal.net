@@ -36,8 +36,7 @@ const tooltipVariants = cva(
  * Props for the Tooltip component.
  */
 export interface TooltipProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "content">,
-    VariantProps<typeof tooltipVariants> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, "content">, VariantProps<typeof tooltipVariants> {
   /** The content to display in the tooltip */
   content: ReactNode;
   /** The trigger element */
@@ -78,18 +77,7 @@ export interface TooltipProps
  * ```
  */
 export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
-  (
-    {
-      className,
-      content,
-      children,
-      placement,
-      delay = 200,
-      disabled = false,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, content, children, placement, delay = 200, disabled = false, ...props }, ref) => {
     const [isVisible, setIsVisible] = useState(false);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     const triggerRef = useRef<HTMLDivElement>(null);
@@ -128,10 +116,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       >
         <div ref={triggerRef}>{children}</div>
         {isVisible && content && (
-          <div
-            role="tooltip"
-            className={cn(tooltipVariants({ placement }), className)}
-          >
+          <div role="tooltip" className={cn(tooltipVariants({ placement }), className)}>
             {content}
           </div>
         )}

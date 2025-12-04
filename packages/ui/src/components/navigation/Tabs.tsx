@@ -60,10 +60,10 @@ export const TabItem = forwardRef<HTMLButtonElement, TabItemProps>(
           "px-4 py-2",
           "text-sm font-medium",
           "transition-colors",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none",
           {
             "text-foreground-muted hover:text-foreground": !active,
-            "text-foreground border-b-2 border-primary": active,
+            "text-foreground border-primary border-b-2": active,
           },
           className
         )}
@@ -112,10 +112,10 @@ export const TabPillItem = forwardRef<HTMLButtonElement, TabPillItemProps>(
         aria-selected={active}
         tabIndex={active ? 0 : -1}
         className={cn(
-          "px-4 py-2 rounded-full",
+          "rounded-full px-4 py-2",
           "text-sm font-medium",
           "transition-colors",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none",
           {
             "text-foreground-muted hover:text-foreground hover:bg-background-muted": !active,
             "text-foreground-inverse bg-primary": active,
@@ -221,7 +221,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
         className={cn(
           "flex",
           {
-            "border-b border-border": variant === "default",
+            "border-border border-b": variant === "default",
             "gap-2": variant === "pills",
           },
           className

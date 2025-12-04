@@ -1,14 +1,14 @@
-import path from 'path';
-import { glob } from 'tinyglobby';
-import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite';
-import type { ImageListPluginOptions, ImageList } from './types.js';
+import path from "path";
+import { glob } from "tinyglobby";
+import type { Plugin, ResolvedConfig, ViteDevServer } from "vite";
+import type { ImageListPluginOptions, ImageList } from "./types.js";
 
-export type { ImageListPluginOptions, ImageList } from './types.js';
+export type { ImageListPluginOptions, ImageList } from "./types.js";
 
-const VIRTUAL_MODULE_ID = 'virtual:image-list';
-const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
+const VIRTUAL_MODULE_ID = "virtual:image-list";
+const RESOLVED_VIRTUAL_MODULE_ID = "\0" + VIRTUAL_MODULE_ID;
 
-const DEFAULT_EXTENSIONS = ['jpg', 'jpeg', 'png'];
+const DEFAULT_EXTENSIONS = ["jpg", "jpeg", "png"];
 
 /**
  * Creates a Vite plugin that provides image file list as a virtual module.
@@ -48,11 +48,7 @@ const DEFAULT_EXTENSIONS = ['jpg', 'jpeg', 'png'];
  * ```
  */
 export function imageListPlugin(options: ImageListPluginOptions): Plugin {
-  const {
-    input,
-    categories,
-    extensions = DEFAULT_EXTENSIONS,
-  } = options;
+  const { input, categories, extensions = DEFAULT_EXTENSIONS } = options;
 
   let config: ResolvedConfig;
   let imageListCache: ImageList | null = null;
@@ -67,9 +63,7 @@ export function imageListPlugin(options: ImageListPluginOptions): Plugin {
     }
 
     const result: ImageList = {};
-    const extPattern = extensions.length === 1
-      ? extensions[0]
-      : `{${extensions.join(',')}}`;
+    const extPattern = extensions.length === 1 ? extensions[0] : `{${extensions.join(",")}}`;
 
     for (const category of categories) {
       const pattern = path.posix.join(input, category, `*.${extPattern}`);
@@ -80,9 +74,7 @@ export function imageListPlugin(options: ImageListPluginOptions): Plugin {
           absolute: false,
         });
 
-        result[category] = files
-          .map((f) => path.basename(f))
-          .sort();
+        result[category] = files.map((f) => path.basename(f)).sort();
       } catch (error) {
         config.logger.warn(
           `[vite-plugin-image-list] Failed to scan category "${category}": ${error instanceof Error ? error.message : String(error)}`
@@ -111,12 +103,12 @@ export function imageListPlugin(options: ImageListPluginOptions): Plugin {
     const module = server.moduleGraph.getModuleById(RESOLVED_VIRTUAL_MODULE_ID);
     if (module) {
       server.moduleGraph.invalidateModule(module);
-      server.hot.send({ type: 'full-reload' });
+      server.hot.send({ type: "full-reload" });
     }
   }
 
   return {
-    name: 'vite-plugin-image-list',
+    name: "vite-plugin-image-list",
 
     configResolved(resolvedConfig) {
       config = resolvedConfig;
@@ -138,22 +130,20 @@ export function imageListPlugin(options: ImageListPluginOptions): Plugin {
     configureServer(server) {
       // Build watch patterns for each category
       const watchPatterns = categories.map((category) => {
-        const extPattern = extensions.length === 1
-          ? extensions[0]
-          : `{${extensions.join(',')}}`;
+        const extPattern = extensions.length === 1 ? extensions[0] : `{${extensions.join(",")}}`;
         return path.posix.join(input, category, `*.${extPattern}`);
       });
 
       server.watcher.add(watchPatterns);
 
-      server.watcher.on('add', (file) => {
+      server.watcher.on("add", (file) => {
         if (isImageFile(file)) {
           config.logger.info(`[vite-plugin-image-list] Image added: ${path.basename(file)}`);
           invalidateModule(server);
         }
       });
 
-      server.watcher.on('unlink', (file) => {
+      server.watcher.on("unlink", (file) => {
         if (isImageFile(file)) {
           config.logger.info(`[vite-plugin-image-list] Image removed: ${path.basename(file)}`);
           invalidateModule(server);

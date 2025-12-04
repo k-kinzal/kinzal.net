@@ -15,37 +15,31 @@ import { Logo } from "./components/brand";
  */
 export function Navbar() {
   const location = useLocation();
-  const isOriginal =
-    location.pathname === "/" || location.pathname === "/original.html";
+  const isOriginal = location.pathname === "/" || location.pathname === "/original.html";
   const isScrap = location.pathname === "/scrap.html";
 
   return (
     <NavbarComponent className="h-header">
-      <Stack
-        direction="horizontal"
-        justify="between"
-        align="center"
-        className="w-full h-full"
-      >
+      <Stack direction="horizontal" justify="between" align="center" className="h-full w-full">
         <Logo />
         <Stack direction="horizontal" gap="none" className="h-full">
           <NavLink
             href="/original.html"
             active={isOriginal}
-            className="w-[120px] h-full font-light leading-[60px] border-l border-border"
+            className="border-border h-full w-[120px] border-l leading-[60px] font-light"
           >
             Original
           </NavLink>
           <NavLink
             href="/scrap.html"
             active={isScrap}
-            className="w-[120px] h-full font-light leading-[60px] border-l border-border"
+            className="border-border h-full w-[120px] border-l leading-[60px] font-light"
           >
             Scrap
           </NavLink>
           <NavLink
             href="http://about.me/kinzal"
-            className="w-[120px] h-full font-light leading-[60px] border-l border-border"
+            className="border-border h-full w-[120px] border-l leading-[60px] font-light"
           >
             About me
           </NavLink>

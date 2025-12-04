@@ -68,10 +68,7 @@ export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>(
 
   useEffect(() => {
     // If lazy loading is disabled (test mode), immediately set intersecting
-    if (
-      typeof window !== "undefined" &&
-      window.__DISABLE_LAZY_LOADING__ === true
-    ) {
+    if (typeof window !== "undefined" && window.__DISABLE_LAZY_LOADING__ === true) {
       setIsIntersecting(true);
       return;
     }

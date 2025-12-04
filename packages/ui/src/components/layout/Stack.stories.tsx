@@ -32,9 +32,7 @@ export default meta;
 type Story = StoryObj<typeof Stack>;
 
 const StackItem = ({ children }: { children: React.ReactNode }) => (
-  <div className="bg-primary/10 border border-primary/20 p-4 text-center rounded">
-    {children}
-  </div>
+  <div className="bg-primary/10 border-primary/20 rounded border p-4 text-center">{children}</div>
 );
 
 export const Vertical: Story = {

@@ -28,7 +28,7 @@ export const Default: Story = {
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="space-y-4 w-96">
+    <div className="w-96 space-y-4">
       <Alert variant="info">This is an info alert.</Alert>
       <Alert variant="success">Operation completed successfully!</Alert>
       <Alert variant="warning">Please review before continuing.</Alert>

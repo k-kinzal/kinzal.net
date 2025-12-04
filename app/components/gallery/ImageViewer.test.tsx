@@ -57,9 +57,7 @@ describe("ImageViewer", () => {
   });
 
   it("renders with scrap category", () => {
-    render(
-      <ImageViewer {...defaultProps} category="scrap" filename="img001.png" />
-    );
+    render(<ImageViewer {...defaultProps} category="scrap" filename="img001.png" />);
 
     expect(screen.getByTestId("image-viewer")).toBeInTheDocument();
   });

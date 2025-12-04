@@ -10,7 +10,7 @@ export function Logo() {
   return (
     <NavBrand
       href="/"
-      className="font-brand text-[28px] leading-[50px] tracking-[10px] font-extralight border-l-[7px] border-primary px-4 h-full"
+      className="font-brand border-primary h-full border-l-[7px] px-4 text-[28px] leading-[50px] font-extralight tracking-[10px]"
     >
       RakugakiYa
     </NavBrand>

@@ -17,14 +17,8 @@ const SITE_NAME = "RakugakiYa";
  */
 export function Footer() {
   return (
-    <FooterComponent className="h-footer border-r-[10px] border-primary px-4">
-      <Stack
-        direction="horizontal"
-        gap="none"
-        justify="between"
-        align="center"
-        className="h-full"
-      >
+    <FooterComponent className="h-footer border-primary border-r-[10px] px-4">
+      <Stack direction="horizontal" gap="none" justify="between" align="center" className="h-full">
         <SocialIcons shareUrl={SITE_URL} twitterText={SITE_NAME} />
         <Copyright />
       </Stack>

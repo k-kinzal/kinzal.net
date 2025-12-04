@@ -50,8 +50,7 @@ export interface ToastData {
  * Props for the Toast component.
  */
 export interface ToastProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof toastVariants> {
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof toastVariants> {
   /** Toast title */
   title?: string | undefined;
   /** Toast description */
@@ -77,19 +76,7 @@ export interface ToastProps
  * ```
  */
 export const Toast = forwardRef<HTMLDivElement, ToastProps>(
-  (
-    {
-      className,
-      variant,
-      title,
-      description,
-      action,
-      onDismiss,
-      open = true,
-      ...props
-    },
-    ref
-  ) => {
+  ({ className, variant, title, description, action, onDismiss, open = true, ...props }, ref) => {
     if (!open) return null;
 
     return (
@@ -101,28 +88,20 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
         className={cn(toastVariants({ variant }), className)}
         {...props}
       >
-        <div className="flex-1 min-w-0">
-          {title && (
-            <div className="font-medium text-foreground">
-              {title}
-            </div>
-          )}
-          {description && (
-            <div className="text-sm text-foreground-muted">
-              {description}
-            </div>
-          )}
+        <div className="min-w-0 flex-1">
+          {title && <div className="text-foreground font-medium">{title}</div>}
+          {description && <div className="text-foreground-muted text-sm">{description}</div>}
         </div>
         {action && <div className="shrink-0">{action}</div>}
         {onDismiss && (
           <button
             type="button"
             onClick={onDismiss}
-            className="shrink-0 p-1 rounded hover:bg-background-muted"
+            className="hover:bg-background-muted shrink-0 rounded p-1"
             aria-label="Dismiss"
           >
             <svg
-              className="w-4 h-4 text-foreground-muted"
+              className="text-foreground-muted h-4 w-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -271,8 +250,7 @@ const toastContainerVariants = cva(
  * Props for the ToastContainer component.
  */
 export interface ToastContainerProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof toastContainerVariants> {}
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof toastContainerVariants> {}
 
 /**
  * Container for rendering toasts.
@@ -290,17 +268,9 @@ export const ToastContainer = forwardRef<HTMLDivElement, ToastContainerProps>(
     const { toasts, removeToast } = useToast();
 
     return (
-      <div
-        ref={ref}
-        className={cn(toastContainerVariants({ position }), className)}
-        {...props}
-      >
+      <div ref={ref} className={cn(toastContainerVariants({ position }), className)} {...props}>
         {toasts.map((toast) => (
-          <ToastItem
-            key={toast.id}
-            toast={toast}
-            onDismiss={() => removeToast(toast.id)}
-          />
+          <ToastItem key={toast.id} toast={toast} onDismiss={() => removeToast(toast.id)} />
         ))}
       </div>
     );

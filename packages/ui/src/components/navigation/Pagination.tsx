@@ -14,8 +14,7 @@ import { cn } from "@/utils/cn";
 /**
  * Props for the PaginationItem component.
  */
-export interface PaginationItemProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PaginationItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * When true, indicates the current page.
    * @defaultValue false
@@ -46,11 +45,11 @@ export const PaginationItem = forwardRef<HTMLButtonElement, PaginationItemProps>
         aria-current={active ? "page" : undefined}
         disabled={disabled}
         className={cn(
-          "min-w-[2.5rem] h-10 px-3",
+          "h-10 min-w-[2.5rem] px-3",
           "inline-flex items-center justify-center",
-          "text-sm font-medium rounded-md",
+          "rounded-md text-sm font-medium",
           "transition-colors",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "focus-visible:ring-primary focus-visible:ring-2 focus-visible:outline-none",
           {
             "text-foreground-muted hover:text-foreground hover:bg-background-muted":
               !active && !disabled,
@@ -79,25 +78,24 @@ PaginationItem.displayName = "PaginationItem";
  * <PaginationItem>10</PaginationItem>
  * ```
  */
-export const PaginationEllipsis = forwardRef<
-  HTMLSpanElement,
-  HTMLAttributes<HTMLSpanElement>
->(({ className, ...props }, ref) => {
-  return (
-    <span
-      ref={ref}
-      className={cn(
-        "min-w-[2.5rem] h-10 px-3",
-        "inline-flex items-center justify-center",
-        "text-foreground-muted",
-        className
-      )}
-      {...props}
-    >
-      ...
-    </span>
-  );
-});
+export const PaginationEllipsis = forwardRef<HTMLSpanElement, HTMLAttributes<HTMLSpanElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <span
+        ref={ref}
+        className={cn(
+          "h-10 min-w-[2.5rem] px-3",
+          "inline-flex items-center justify-center",
+          "text-foreground-muted",
+          className
+        )}
+        {...props}
+      >
+        ...
+      </span>
+    );
+  }
+);
 
 PaginationEllipsis.displayName = "PaginationEllipsis";
 

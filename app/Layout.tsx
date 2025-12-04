@@ -14,11 +14,11 @@ import { Footer } from "./Footer";
 export function Layout() {
   return (
     <>
-      <div className="fixed top-0 left-0 w-full z-50">
+      <div className="fixed top-0 left-0 z-50 w-full">
         <Navbar />
       </div>
       <Outlet />
-      <div className="fixed bottom-0 left-0 w-full z-50">
+      <div className="fixed bottom-0 left-0 z-50 w-full">
         <Footer />
       </div>
     </>

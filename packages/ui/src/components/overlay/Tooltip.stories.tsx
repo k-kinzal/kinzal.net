@@ -97,9 +97,7 @@ export const RichContent: Story = {
     content: (
       <Stack gap="xs">
         <span className="font-semibold">Pro tip</span>
-        <span className="text-xs opacity-80">
-          Press Ctrl+S to save your work
-        </span>
+        <span className="text-xs opacity-80">Press Ctrl+S to save your work</span>
       </Stack>
     ),
     children: (

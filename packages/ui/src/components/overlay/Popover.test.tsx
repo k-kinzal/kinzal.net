@@ -118,11 +118,7 @@ describe("Popover", () => {
     const user = userEvent.setup();
     const onOpenChange = vi.fn();
     const { rerender } = render(
-      <Popover
-        content={<div>Popover content</div>}
-        open={false}
-        onOpenChange={onOpenChange}
-      >
+      <Popover content={<div>Popover content</div>} open={false} onOpenChange={onOpenChange}>
         <button>Open</button>
       </Popover>
     );
@@ -133,11 +129,7 @@ describe("Popover", () => {
     expect(onOpenChange).toHaveBeenCalledWith(true);
 
     rerender(
-      <Popover
-        content={<div>Popover content</div>}
-        open={true}
-        onOpenChange={onOpenChange}
-      >
+      <Popover content={<div>Popover content</div>} open={true} onOpenChange={onOpenChange}>
         <button>Open</button>
       </Popover>
     );

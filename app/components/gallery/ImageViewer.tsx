@@ -27,13 +27,7 @@ interface ImageViewerProps {
  *
  * Click on image closes viewer by calling onClose callback.
  */
-export function ImageViewer({
-  id,
-  category,
-  filename,
-  isSelected,
-  onClose,
-}: ImageViewerProps) {
+export function ImageViewer({ id, category, filename, isSelected, onClose }: ImageViewerProps) {
   const handleClose = (e: React.MouseEvent) => {
     e.preventDefault();
     onClose();
@@ -46,14 +40,14 @@ export function ImageViewer({
       direction="horizontal"
       justify="center"
       align="center"
-      className={`absolute top-0 w-full h-full bg-white ${
-        isSelected ? "left-0 z-overlay" : "-left-full"
+      className={`absolute top-0 h-full w-full bg-white ${
+        isSelected ? "z-overlay left-0" : "-left-full"
       }`}
     >
       <Link
         href="#"
         variant="ghost"
-        className="flex items-center justify-center max-w-full max-h-full"
+        className="flex max-h-full max-w-full items-center justify-center"
         onClick={handleClose}
       >
         <OptimizedImage
@@ -61,7 +55,7 @@ export function ImageViewer({
           filename={filename}
           variant="full"
           objectFit="contain"
-          className={`max-w-full max-h-screen ${isSelected ? "block" : "hidden"}`}
+          className={`max-h-screen max-w-full ${isSelected ? "block" : "hidden"}`}
         />
       </Link>
     </Stack>

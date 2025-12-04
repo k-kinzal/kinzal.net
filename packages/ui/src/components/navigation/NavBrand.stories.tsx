@@ -20,7 +20,7 @@ const meta: Meta<typeof NavBrand> = {
   },
   decorators: [
     (Story) => (
-      <div className="h-16 bg-background flex items-center px-4">
+      <div className="bg-background flex h-16 items-center px-4">
         <Story />
       </div>
     ),
@@ -59,12 +59,7 @@ export const WithLogo: Story = {
     href: "/",
     children: (
       <span className="flex items-center gap-2">
-        <svg
-          className="w-8 h-8"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
+        <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
         </svg>
         <span className="font-bold">Brand</span>

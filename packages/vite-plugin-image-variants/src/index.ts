@@ -1,14 +1,14 @@
-import path from 'path';
-import { glob } from 'tinyglobby';
-import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite';
-import type { ImageVariantsPluginOptions } from './types.js';
+import path from "path";
+import { glob } from "tinyglobby";
+import type { Plugin, ResolvedConfig, ViteDevServer } from "vite";
+import type { ImageVariantsPluginOptions } from "./types.js";
 
-export type { ImageVariantsPluginOptions, ImageVariants, ImageVariantLoader } from './types.js';
+export type { ImageVariantsPluginOptions, ImageVariants, ImageVariantLoader } from "./types.js";
 
-const VIRTUAL_MODULE_ID = 'virtual:image-variants';
-const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
+const VIRTUAL_MODULE_ID = "virtual:image-variants";
+const RESOLVED_VIRTUAL_MODULE_ID = "\0" + VIRTUAL_MODULE_ID;
 
-const DEFAULT_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'avif'];
+const DEFAULT_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp", "avif"];
 
 /**
  * Creates a Vite plugin that generates image variant imports for vite-imagetools.
@@ -88,10 +88,10 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
    */
   function extractBaseDir(pattern: string): string {
     // Remove leading ./ if present
-    let normalized = pattern.startsWith('./') ? pattern.slice(1) : pattern;
+    let normalized = pattern.startsWith("./") ? pattern.slice(1) : pattern;
     // Ensure leading /
-    if (!normalized.startsWith('/')) {
-      normalized = '/' + normalized;
+    if (!normalized.startsWith("/")) {
+      normalized = "/" + normalized;
     }
     // Find the first glob character and take the directory before it
     const globIndex = normalized.search(/[*?{]/);
@@ -100,7 +100,7 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
     }
     const beforeGlob = normalized.slice(0, globIndex);
     // Remove trailing slash and filename part if any
-    const lastSlash = beforeGlob.lastIndexOf('/');
+    const lastSlash = beforeGlob.lastIndexOf("/");
     return lastSlash > 0 ? beforeGlob.slice(0, lastSlash) : beforeGlob;
   }
 
@@ -119,7 +119,7 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
       return singleMatch[1];
     }
     // Default fallback
-    return 'jpg,jpeg,png';
+    return "jpg,jpeg,png";
   }
 
   /**
@@ -138,11 +138,13 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
     // Build glob patterns for each query
     for (let i = 0; i < queries.length; i++) {
       const query = queries[i];
-      lines.push(`const glob${i} = import.meta.glob('${globPattern}', { query: '${query}', import: 'default' });`);
+      lines.push(
+        `const glob${i} = import.meta.glob('${globPattern}', { query: '${query}', import: 'default' });`
+      );
     }
 
-    lines.push('');
-    lines.push('export const imageVariants = {');
+    lines.push("");
+    lines.push("export const imageVariants = {");
 
     for (const file of files) {
       // Use absolute path from project root
@@ -155,12 +157,12 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
         lines.push(`    '${query}': glob${i}['${key}'],`);
       }
 
-      lines.push('  },');
+      lines.push("  },");
     }
 
-    lines.push('};');
+    lines.push("};");
 
-    return lines.join('\n');
+    return lines.join("\n");
   }
 
   /**
@@ -179,12 +181,12 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
     const module = server.moduleGraph.getModuleById(RESOLVED_VIRTUAL_MODULE_ID);
     if (module) {
       server.moduleGraph.invalidateModule(module);
-      server.hot.send({ type: 'full-reload' });
+      server.hot.send({ type: "full-reload" });
     }
   }
 
   return {
-    name: 'vite-plugin-image-variants',
+    name: "vite-plugin-image-variants",
 
     configResolved(resolvedConfig) {
       config = resolvedConfig;
@@ -201,7 +203,9 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
         const files = await scanImages();
 
         if (files.length === 0) {
-          config.logger.warn('[vite-plugin-image-variants] No image files found matching the input pattern');
+          config.logger.warn(
+            "[vite-plugin-image-variants] No image files found matching the input pattern"
+          );
         }
 
         return generateCode(files);
@@ -212,14 +216,14 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
       // Watch the input pattern directory
       server.watcher.add(input);
 
-      server.watcher.on('add', (file) => {
+      server.watcher.on("add", (file) => {
         if (isImageFile(file)) {
           config.logger.info(`[vite-plugin-image-variants] Image added: ${path.basename(file)}`);
           invalidateModule(server);
         }
       });
 
-      server.watcher.on('unlink', (file) => {
+      server.watcher.on("unlink", (file) => {
         if (isImageFile(file)) {
           config.logger.info(`[vite-plugin-image-variants] Image removed: ${path.basename(file)}`);
           invalidateModule(server);

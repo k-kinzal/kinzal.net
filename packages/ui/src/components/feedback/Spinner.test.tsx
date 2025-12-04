@@ -16,10 +16,7 @@ describe("Spinner", () => {
 
   it("accepts custom label", () => {
     render(<Spinner label="Processing..." />);
-    expect(screen.getByRole("status")).toHaveAttribute(
-      "aria-label",
-      "Processing..."
-    );
+    expect(screen.getByRole("status")).toHaveAttribute("aria-label", "Processing...");
   });
 
   it("has screen reader text", () => {

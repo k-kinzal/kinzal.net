@@ -1,8 +1,8 @@
-import * as ort from 'onnxruntime-node';
-import sharp from 'sharp';
-import type { FaceRect } from './types.js';
-import { ensureModelDownloaded } from './model-downloader.js';
-import type { Logger } from 'imagetools-core';
+import * as ort from "onnxruntime-node";
+import sharp from "sharp";
+import type { FaceRect } from "./types.js";
+import { ensureModelDownloaded } from "./model-downloader.js";
+import type { Logger } from "imagetools-core";
 
 const MODEL_INPUT_SIZE = 640;
 const CONF_THRESHOLD = 0.25;
@@ -35,8 +35,8 @@ async function getSession(logger: Logger): Promise<ort.InferenceSession | null> 
 
     try {
       session = await ort.InferenceSession.create(modelPath, {
-        executionProviders: ['cpu'],
-        graphOptimizationLevel: 'all',
+        executionProviders: ["cpu"],
+        graphOptimizationLevel: "all",
       });
 
       return session;
@@ -74,7 +74,7 @@ async function preprocessImage(imagePath: string): Promise<PreprocessResult> {
   const padY = Math.floor((MODEL_INPUT_SIZE - scaledHeight) / 2);
 
   const resized = await sharp(imagePath)
-    .resize(scaledWidth, scaledHeight, { fit: 'fill' })
+    .resize(scaledWidth, scaledHeight, { fit: "fill" })
     .extend({
       top: padY,
       bottom: MODEL_INPUT_SIZE - scaledHeight - padY,
@@ -95,7 +95,7 @@ async function preprocessImage(imagePath: string): Promise<PreprocessResult> {
     float32Data[2 * pixelCount + i] = resized[i * 3 + 2]! / 255.0;
   }
 
-  const tensor = new ort.Tensor('float32', float32Data, [1, 3, MODEL_INPUT_SIZE, MODEL_INPUT_SIZE]);
+  const tensor = new ort.Tensor("float32", float32Data, [1, 3, MODEL_INPUT_SIZE, MODEL_INPUT_SIZE]);
 
   return {
     tensor,
@@ -163,7 +163,9 @@ function postprocessOutput(
   const dims = output.dims;
 
   let numDetections: number;
-  let getDetection: (i: number) => { cx: number; cy: number; w: number; h: number; confidence: number } | null;
+  let getDetection: (
+    i: number
+  ) => { cx: number; cy: number; w: number; h: number; confidence: number } | null;
 
   if (dims.length === 3) {
     if (dims[1] === 5) {
@@ -259,7 +261,10 @@ function postprocessOutput(
  * @param logger - Logger instance from imagetools context
  * @returns The largest detected face rectangle, or null if no face found
  */
-export async function detectAnimeFaceYOLO(imagePath: string, logger: Logger): Promise<FaceRect | null> {
+export async function detectAnimeFaceYOLO(
+  imagePath: string,
+  logger: Logger
+): Promise<FaceRect | null> {
   try {
     const sess = await getSession(logger);
 
@@ -267,7 +272,8 @@ export async function detectAnimeFaceYOLO(imagePath: string, logger: Logger): Pr
       return null;
     }
 
-    const { tensor, originalWidth, originalHeight, scale, padX, padY } = await preprocessImage(imagePath);
+    const { tensor, originalWidth, originalHeight, scale, padX, padY } =
+      await preprocessImage(imagePath);
 
     const inputName = sess.inputNames[0]!;
     const feeds: Record<string, ort.Tensor> = { [inputName]: tensor };

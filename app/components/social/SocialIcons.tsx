@@ -21,12 +21,7 @@ interface SocialIconsProps {
  */
 export function SocialIcons({ shareUrl, twitterText }: SocialIconsProps) {
   return (
-    <Stack
-      direction="horizontal"
-      gap="none"
-      align="center"
-      className="gap-[10px]"
-    >
+    <Stack direction="horizontal" gap="none" align="center" className="gap-[10px]">
       <TwitterIcon shareUrl={shareUrl} text={twitterText} />
       <FacebookIcon shareUrl={shareUrl} />
       <GooglePlusIcon shareUrl={shareUrl} />

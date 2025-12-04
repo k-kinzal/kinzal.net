@@ -2,32 +2,28 @@ import { forwardRef, type HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
-const dividerVariants = cva(
-  "border-border",
-  {
-    variants: {
-      orientation: {
-        horizontal: "w-full border-t",
-        vertical: "h-full border-l self-stretch",
-      },
-      variant: {
-        default: "",
-        dashed: "border-dashed",
-      },
+const dividerVariants = cva("border-border", {
+  variants: {
+    orientation: {
+      horizontal: "w-full border-t",
+      vertical: "h-full border-l self-stretch",
     },
-    defaultVariants: {
-      orientation: "horizontal",
-      variant: "default",
+    variant: {
+      default: "",
+      dashed: "border-dashed",
     },
-  }
-);
+  },
+  defaultVariants: {
+    orientation: "horizontal",
+    variant: "default",
+  },
+});
 
 /**
  * Props for the Divider component.
  */
 export interface DividerProps
-  extends HTMLAttributes<HTMLHRElement>,
-    VariantProps<typeof dividerVariants> {}
+  extends HTMLAttributes<HTMLHRElement>, VariantProps<typeof dividerVariants> {}
 
 /**
  * Divider component for separating content.

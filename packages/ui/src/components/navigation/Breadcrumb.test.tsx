@@ -19,10 +19,7 @@ describe("Breadcrumb", () => {
         <BreadcrumbItem href="/">Home</BreadcrumbItem>
       </Breadcrumb>
     );
-    expect(screen.getByRole("navigation")).toHaveAttribute(
-      "aria-label",
-      "Breadcrumb"
-    );
+    expect(screen.getByRole("navigation")).toHaveAttribute("aria-label", "Breadcrumb");
   });
 
   it("renders separator between items", () => {

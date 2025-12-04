@@ -1,4 +1,4 @@
-import type { FaceRect } from './types.js';
+import type { FaceRect } from "./types.js";
 
 /**
  * Represents a square region with position and size.

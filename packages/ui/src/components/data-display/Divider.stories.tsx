@@ -47,7 +47,7 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <div className="flex items-center gap-4 h-8">
+    <div className="flex h-8 items-center gap-4">
       <span className="text-foreground">Left</span>
       <Divider orientation="vertical" />
       <span className="text-foreground">Right</span>

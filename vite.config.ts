@@ -61,11 +61,12 @@ const QUERIES = [
   'w=1920&fit=inside',
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default defineConfig(() => ({
   ssgOptions: {
     script: 'async',
     formatting: 'minify',
-  },
+  } as any,
   plugins: [
     disableSsrManifest(),
     faceCrop,

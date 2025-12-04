@@ -16,11 +16,7 @@ interface PopupConfig {
  * @param name - Window name for the popup
  * @param config - Popup window configuration
  */
-function openSocialPopup(
-  url: string,
-  name: string,
-  config: PopupConfig
-): void {
+function openSocialPopup(url: string, name: string, config: PopupConfig): void {
   const features = [
     `width=${config.width}`,
     `height=${config.height}`,
@@ -80,8 +76,7 @@ export function SocialIcon({
     });
   };
 
-  const buttonClass =
-    "w-[34px] h-[34px] rounded-none text-white border border-black/20";
+  const buttonClass = "w-[34px] h-[34px] rounded-none text-white border border-black/20";
 
   return (
     <IconButton

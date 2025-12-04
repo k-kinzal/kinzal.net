@@ -17,10 +17,7 @@ interface ImagePlaceholderProps {
  * Shows a dark background with 1:1 aspect ratio until
  * the actual image is loaded and ready to display.
  */
-export function ImagePlaceholder({
-  containerRef,
-  className,
-}: ImagePlaceholderProps) {
+export function ImagePlaceholder({ containerRef, className }: ImagePlaceholderProps) {
   return (
     <div
       ref={containerRef}

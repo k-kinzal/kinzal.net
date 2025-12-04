@@ -40,9 +40,7 @@ export const Default: Story = {
             <Icon icon={Facebook} size={16} />
           </IconButton>
         </Stack>
-        <span className="text-sm text-foreground">
-          &copy; 2024, example.com
-        </span>
+        <span className="text-foreground text-sm">&copy; 2024, example.com</span>
       </Stack>
     ),
   },
@@ -54,9 +52,7 @@ export const Fixed: Story = {
     className: "h-12 px-4",
     children: (
       <Stack direction="horizontal" justify="center" align="center" className="h-full w-full">
-        <span className="text-sm text-foreground">
-          Fixed footer
-        </span>
+        <span className="text-foreground text-sm">Fixed footer</span>
       </Stack>
     ),
   },
@@ -67,9 +63,7 @@ export const SimpleFooter: Story = {
     className: "h-12 px-4",
     children: (
       <Stack direction="horizontal" justify="center" align="center" className="h-full w-full">
-        <span className="text-sm text-foreground-muted">
-          Made with love
-        </span>
+        <span className="text-foreground-muted text-sm">Made with love</span>
       </Stack>
     ),
   },

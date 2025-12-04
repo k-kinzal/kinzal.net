@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
+import { fn } from "storybook/test";
 import { ImageViewer } from "./ImageViewer";
 
 const meta: Meta<typeof ImageViewer> = {

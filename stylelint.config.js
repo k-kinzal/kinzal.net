@@ -1,11 +1,11 @@
 /**
- * Stylelint Configuration
+ * Stylelint Configuration for kinzal.net monorepo
  *
  * Enforces design token usage and prevents hardcoded values.
  * This ensures consistency across the design system.
+ *
+ * @type {import('stylelint').Config}
  */
-
-/** @type {import('stylelint').Config} */
 export default {
   extends: ["stylelint-config-standard"],
 
@@ -43,8 +43,7 @@ export default {
     "declaration-no-important": [
       true,
       {
-        message:
-          "Avoid !important. Use more specific selectors or design tokens",
+        message: "Avoid !important. Use more specific selectors or design tokens",
       },
     ],
 
@@ -68,6 +67,11 @@ export default {
           "screen",
           "theme",
           "import",
+          "plugin",
+          "source",
+          "utility",
+          "variant",
+          "custom-variant",
         ],
       },
     ],
@@ -76,7 +80,7 @@ export default {
     "function-no-unknown": [
       true,
       {
-        ignoreFunctions: ["theme", "screen"],
+        ignoreFunctions: ["theme", "screen", "--alpha"],
       },
     ],
 
@@ -92,9 +96,8 @@ export default {
 
   overrides: [
     {
-      // For the globals.css file that defines CSS variables
-      // Allow hex colors only in custom property definitions
-      files: ["**/styles/globals.css", "**/styles/tokens.css", "src/styles/*.css"],
+      // For files that define CSS variables, allow hex colors
+      files: ["**/styles/globals.css", "**/styles/tokens.css", "**/styles/*.css"],
       rules: {
         // Allow hex in CSS variable definitions
         "color-no-hex": null,
@@ -106,11 +109,5 @@ export default {
   ],
 
   // Ignore patterns
-  ignoreFiles: [
-    "dist/**",
-    "node_modules/**",
-    "**/*.tsx",
-    "**/*.ts",
-    "**/*.js",
-  ],
+  ignoreFiles: ["**/dist/**", "**/node_modules/**", "**/storybook-static/**"],
 };

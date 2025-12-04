@@ -2,12 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen, waitFor, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { axe } from "jest-axe";
-import {
-  Toast,
-  ToastProvider,
-  ToastContainer,
-  useToast,
-} from "./Toast";
+import { Toast, ToastProvider, ToastContainer, useToast } from "./Toast";
 
 // Test component to use the useToast hook
 function ToastTrigger() {
@@ -15,11 +10,7 @@ function ToastTrigger() {
 
   return (
     <div>
-      <button
-        onClick={() =>
-          addToast({ title: "Test Toast", description: "Test description" })
-        }
-      >
+      <button onClick={() => addToast({ title: "Test Toast", description: "Test description" })}>
         Add Toast
       </button>
       <button
@@ -40,9 +31,7 @@ function ToastTrigger() {
 
 describe("Toast", () => {
   it("renders title and description", () => {
-    render(
-      <Toast title="Test Title" description="Test description" />
-    );
+    render(<Toast title="Test Title" description="Test description" />);
 
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByText("Test description")).toBeInTheDocument();
@@ -75,12 +64,7 @@ describe("Toast", () => {
   });
 
   it("renders action when provided", () => {
-    render(
-      <Toast
-        title="Test"
-        action={<button>Undo</button>}
-      />
-    );
+    render(<Toast title="Test" action={<button>Undo</button>} />);
 
     expect(screen.getByRole("button", { name: "Undo" })).toBeInTheDocument();
   });
@@ -91,9 +75,7 @@ describe("Toast", () => {
   });
 
   it("has no accessibility violations", async () => {
-    const { container } = render(
-      <Toast title="Test" description="Description" />
-    );
+    const { container } = render(<Toast title="Test" description="Description" />);
 
     const results = await axe(container);
     expect(results).toHaveNoViolations();

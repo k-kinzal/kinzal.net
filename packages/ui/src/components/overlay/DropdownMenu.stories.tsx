@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger className="inline-flex items-center gap-1 px-4 py-2 rounded-md border border-border hover:bg-background-muted">
+      <DropdownMenuTrigger className="border-border hover:bg-background-muted inline-flex items-center gap-1 rounded-md border px-4 py-2">
         Options
         <Icon icon={ChevronDown} size={16} />
       </DropdownMenuTrigger>
@@ -55,7 +55,7 @@ export const Default: Story = {
 export const WithIcons: Story = {
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger className="inline-flex items-center gap-1 px-4 py-2 rounded-md border border-border hover:bg-background-muted">
+      <DropdownMenuTrigger className="border-border hover:bg-background-muted inline-flex items-center gap-1 rounded-md border px-4 py-2">
         Actions
         <Icon icon={ChevronDown} size={16} />
       </DropdownMenuTrigger>
@@ -99,7 +99,7 @@ export const WithIcons: Story = {
 export const WithLabels: Story = {
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger className="inline-flex items-center gap-1 px-4 py-2 rounded-md border border-border hover:bg-background-muted">
+      <DropdownMenuTrigger className="border-border hover:bg-background-muted inline-flex items-center gap-1 rounded-md border px-4 py-2">
         <Icon icon={User} size={16} />
         Account
         <Icon icon={ChevronDown} size={16} />
@@ -136,7 +136,7 @@ export const WithIconTrigger: Story = {
     <DropdownMenu>
       <DropdownMenuTrigger
         aria-label="More options"
-        className="p-2 rounded-md hover:bg-background-muted"
+        className="hover:bg-background-muted rounded-md p-2"
       >
         <Icon icon={MoreVertical} size={18} />
       </DropdownMenuTrigger>
@@ -154,7 +154,7 @@ export const Placements: Story = {
   render: () => (
     <Stack direction="horizontal" gap="xl" className="p-16">
       <DropdownMenu>
-        <DropdownMenuTrigger className="px-3 py-1.5 text-sm rounded-md border border-border hover:bg-background-muted">
+        <DropdownMenuTrigger className="border-border hover:bg-background-muted rounded-md border px-3 py-1.5 text-sm">
           Bottom Start
         </DropdownMenuTrigger>
         <DropdownMenuContent placement="bottom-start">
@@ -164,7 +164,7 @@ export const Placements: Story = {
       </DropdownMenu>
 
       <DropdownMenu>
-        <DropdownMenuTrigger className="px-3 py-1.5 text-sm rounded-md border border-border hover:bg-background-muted">
+        <DropdownMenuTrigger className="border-border hover:bg-background-muted rounded-md border px-3 py-1.5 text-sm">
           Bottom End
         </DropdownMenuTrigger>
         <DropdownMenuContent placement="bottom-end">
@@ -174,7 +174,7 @@ export const Placements: Story = {
       </DropdownMenu>
 
       <DropdownMenu>
-        <DropdownMenuTrigger className="px-3 py-1.5 text-sm rounded-md border border-border hover:bg-background-muted">
+        <DropdownMenuTrigger className="border-border hover:bg-background-muted rounded-md border px-3 py-1.5 text-sm">
           Top Start
         </DropdownMenuTrigger>
         <DropdownMenuContent placement="top-start">
@@ -184,7 +184,7 @@ export const Placements: Story = {
       </DropdownMenu>
 
       <DropdownMenu>
-        <DropdownMenuTrigger className="px-3 py-1.5 text-sm rounded-md border border-border hover:bg-background-muted">
+        <DropdownMenuTrigger className="border-border hover:bg-background-muted rounded-md border px-3 py-1.5 text-sm">
           Top End
         </DropdownMenuTrigger>
         <DropdownMenuContent placement="top-end">
@@ -199,7 +199,7 @@ export const Placements: Story = {
 export const WithDisabledItems: Story = {
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger className="px-4 py-2 rounded-md border border-border hover:bg-background-muted">
+      <DropdownMenuTrigger className="border-border hover:bg-background-muted rounded-md border px-4 py-2">
         Options
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -217,28 +217,43 @@ export const WithDisabledItems: Story = {
 
 export const ContextMenuStyle: Story = {
   render: () => (
-    <div className="p-8 border border-dashed border-border rounded-lg text-center text-foreground-muted">
+    <div className="border-border text-foreground-muted rounded-lg border border-dashed p-8 text-center">
       <DropdownMenu>
         <DropdownMenuTrigger className="cursor-context-menu p-8">
           Right click simulation
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48">
           <DropdownMenuItem>
-            <Stack direction="horizontal" gap="sm" align="center" className="w-full justify-between">
+            <Stack
+              direction="horizontal"
+              gap="sm"
+              align="center"
+              className="w-full justify-between"
+            >
               <span>Cut</span>
-              <span className="text-xs text-foreground-muted">Ctrl+X</span>
+              <span className="text-foreground-muted text-xs">Ctrl+X</span>
             </Stack>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Stack direction="horizontal" gap="sm" align="center" className="w-full justify-between">
+            <Stack
+              direction="horizontal"
+              gap="sm"
+              align="center"
+              className="w-full justify-between"
+            >
               <span>Copy</span>
-              <span className="text-xs text-foreground-muted">Ctrl+C</span>
+              <span className="text-foreground-muted text-xs">Ctrl+C</span>
             </Stack>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Stack direction="horizontal" gap="sm" align="center" className="w-full justify-between">
+            <Stack
+              direction="horizontal"
+              gap="sm"
+              align="center"
+              className="w-full justify-between"
+            >
               <span>Paste</span>
-              <span className="text-xs text-foreground-muted">Ctrl+V</span>
+              <span className="text-foreground-muted text-xs">Ctrl+V</span>
             </Stack>
           </DropdownMenuItem>
           <DropdownMenuSeparator />

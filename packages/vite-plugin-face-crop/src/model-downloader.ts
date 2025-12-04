@@ -1,13 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import https from 'https';
-import { pipeline } from 'stream/promises';
-import type { Logger } from 'imagetools-core';
+import fs from "fs";
+import path from "path";
+import https from "https";
+import { pipeline } from "stream/promises";
+import type { Logger } from "imagetools-core";
 
-const MODEL_REPO = 'deepghs/anime_face_detection';
-const MODEL_PATH = 'face_detect_v1.4_s/model.onnx';
+const MODEL_REPO = "deepghs/anime_face_detection";
+const MODEL_PATH = "face_detect_v1.4_s/model.onnx";
 const MODEL_URL = `https://huggingface.co/${MODEL_REPO}/resolve/main/${MODEL_PATH}`;
-const MODEL_FILENAME = 'anime_face_detection_v1.4_s.onnx';
+const MODEL_FILENAME = "anime_face_detection_v1.4_s.onnx";
 
 let cacheDir: string | null = null;
 
@@ -24,10 +24,10 @@ export function setModelCacheDir(dir: string): void {
 function getCacheDir(): string {
   if (!cacheDir) {
     throw new Error(
-      'Cache directory not configured. Make sure faceCropPlugin is added to Vite plugins before imagetools.'
+      "Cache directory not configured. Make sure faceCropPlugin is added to Vite plugins before imagetools."
     );
   }
-  return path.join(cacheDir, 'models');
+  return path.join(cacheDir, "models");
 }
 
 async function downloadFile(url: string, destPath: string): Promise<void> {
@@ -59,7 +59,7 @@ async function downloadFile(url: string, destPath: string): Promise<void> {
               reject(err);
             });
         })
-        .on('error', (err) => {
+        .on("error", (err) => {
           fs.unlink(destPath, () => {});
           reject(err);
         });
@@ -94,7 +94,7 @@ export async function ensureModelDownloaded(logger: Logger): Promise<string | nu
     return null;
   }
 
-  logger.info('Downloading face detection model...');
+  logger.info("Downloading face detection model...");
 
   const tempPath = `${localModelPath}.tmp`;
 

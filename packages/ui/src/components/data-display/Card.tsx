@@ -2,35 +2,31 @@ import { forwardRef, type HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
-const cardVariants = cva(
-  "rounded-lg",
-  {
-    variants: {
-      variant: {
-        default: "bg-background shadow-sm",
-        outline: "bg-transparent border border-border",
-        ghost: "bg-transparent",
-      },
-      padding: {
-        none: "",
-        sm: "p-3",
-        md: "p-4",
-        lg: "p-6",
-      },
+const cardVariants = cva("rounded-lg", {
+  variants: {
+    variant: {
+      default: "bg-background shadow-sm",
+      outline: "bg-transparent border border-border",
+      ghost: "bg-transparent",
     },
-    defaultVariants: {
-      variant: "default",
-      padding: "md",
+    padding: {
+      none: "",
+      sm: "p-3",
+      md: "p-4",
+      lg: "p-6",
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+    padding: "md",
+  },
+});
 
 /**
  * Props for the Card component.
  */
 export interface CardProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof cardVariants> {}
+  extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
 /**
  * Props for CardHeader component.
@@ -85,11 +81,7 @@ export type CardFooterProps = HTMLAttributes<HTMLDivElement>;
 const CardRoot = forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant, padding, children, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn(cardVariants({ variant, padding }), className)}
-        {...props}
-      >
+      <div ref={ref} className={cn(cardVariants({ variant, padding }), className)} {...props}>
         {children}
       </div>
     );
@@ -111,11 +103,7 @@ CardRoot.displayName = "Card";
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn("px-4 py-3 border-b border-border", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("border-border border-b px-4 py-3", className)} {...props}>
         {children}
       </div>
     );
@@ -137,11 +125,7 @@ CardHeader.displayName = "CardHeader";
 const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={cn("p-4", className)}
-        {...props}
-      >
+      <div ref={ref} className={cn("p-4", className)} {...props}>
         {children}
       </div>
     );
@@ -166,11 +150,7 @@ const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
     return (
       <div
         ref={ref}
-        className={cn(
-          "px-4 py-3 border-t border-border",
-          "flex items-center gap-2",
-          className
-        )}
+        className={cn("border-border border-t px-4 py-3", "flex items-center gap-2", className)}
         {...props}
       >
         {children}

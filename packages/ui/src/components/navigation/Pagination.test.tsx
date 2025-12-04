@@ -19,10 +19,7 @@ describe("Pagination", () => {
         <PaginationItem>1</PaginationItem>
       </Pagination>
     );
-    expect(screen.getByRole("navigation")).toHaveAttribute(
-      "aria-label",
-      "Pagination"
-    );
+    expect(screen.getByRole("navigation")).toHaveAttribute("aria-label", "Pagination");
   });
 
   it("forwards ref correctly", () => {

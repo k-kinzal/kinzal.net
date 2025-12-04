@@ -33,8 +33,7 @@ const iconButtonVariants = cva(
  * Props for the IconButton component.
  */
 export interface IconButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof iconButtonVariants> {}
+  extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof iconButtonVariants> {}
 
 /**
  * Circular button for icon-only actions.
@@ -53,11 +52,7 @@ export interface IconButtonProps
 const IconButtonComponent = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, variant, size, children, ...props }, ref) => {
     return (
-      <button
-        ref={ref}
-        className={cn(iconButtonVariants({ variant, size }), className)}
-        {...props}
-      >
+      <button ref={ref} className={cn(iconButtonVariants({ variant, size }), className)} {...props}>
         {children}
       </button>
     );

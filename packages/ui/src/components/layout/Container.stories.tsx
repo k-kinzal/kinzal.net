@@ -15,11 +15,7 @@ type Story = StoryObj<typeof Container>;
 
 export const Default: Story = {
   args: {
-    children: (
-      <div className="bg-background-muted p-4 text-center">
-        Container with max-width
-      </div>
-    ),
+    children: <div className="bg-background-muted p-4 text-center">Container with max-width</div>,
   },
 };
 
@@ -27,9 +23,7 @@ export const Fluid: Story = {
   args: {
     fluid: true,
     children: (
-      <div className="bg-background-muted p-4 text-center">
-        Fluid container (full width)
-      </div>
+      <div className="bg-background-muted p-4 text-center">Fluid container (full width)</div>
     ),
   },
 };

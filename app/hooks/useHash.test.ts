@@ -43,10 +43,9 @@ describe("useHash", () => {
     });
 
     it("updates when initialHash prop changes", () => {
-      const { result, rerender } = renderHook(
-        ({ initialHash }) => useHash(initialHash),
-        { initialProps: { initialHash: "first" } }
-      );
+      const { result, rerender } = renderHook(({ initialHash }) => useHash(initialHash), {
+        initialProps: { initialHash: "first" },
+      });
 
       expect(result.current.hash).toBe("first");
 

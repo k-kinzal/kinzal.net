@@ -1,14 +1,14 @@
-import path from 'path';
-import { detectAnimeFace, setCacheDir } from './face-detector.js';
-import { calculateCropRect } from './crop-utils.js';
-import type { TransformFactory, TransformFactoryContext, ImageConfig } from 'imagetools-core';
-import type Sharp from 'sharp';
-import type { Plugin, ResolvedConfig } from 'vite';
+import path from "path";
+import { detectAnimeFace, setCacheDir } from "./face-detector.js";
+import { calculateCropRect } from "./crop-utils.js";
+import type { TransformFactory, TransformFactoryContext, ImageConfig } from "imagetools-core";
+import type Sharp from "sharp";
+import type { Plugin, ResolvedConfig } from "vite";
 
-export type { FaceRect } from './types.js';
+export type { FaceRect } from "./types.js";
 
-const DEFAULT_CACHE_DIR = 'node_modules/.vite';
-const PLUGIN_CACHE_SUBDIR = 'vite-plugin-face-crop';
+const DEFAULT_CACHE_DIR = "node_modules/.vite";
+const PLUGIN_CACHE_SUBDIR = "vite-plugin-face-crop";
 
 /**
  * Options for the face crop plugin.
@@ -29,7 +29,7 @@ export interface FaceCropPluginOptions {
 }
 
 interface FaceCropConfig {
-  faceCrop: '' | 'true';
+  faceCrop: "" | "true";
 }
 
 const DEFAULT_PADDING = 2.0;
@@ -45,7 +45,7 @@ function createTransform(padding: number): TransformFactory<FaceCropConfig> {
       return undefined;
     }
 
-    ctx.useParam('faceCrop');
+    ctx.useParam("faceCrop");
 
     return async (image: Sharp.Sharp): Promise<Sharp.Sharp> => {
       const metadata = await image.metadata();
@@ -118,7 +118,7 @@ export function faceCropPlugin(options: FaceCropPluginOptions = {}): Plugin & {
   let resolvedCacheDir: string | null = null;
 
   const plugin: Plugin & { getTransform: () => TransformFactory<FaceCropConfig> } = {
-    name: 'vite-plugin-face-crop',
+    name: "vite-plugin-face-crop",
 
     configResolved(config: ResolvedConfig) {
       const baseCacheDir = options.cacheDir ?? config.cacheDir ?? DEFAULT_CACHE_DIR;
@@ -153,7 +153,9 @@ export function faceCropPlugin(options: FaceCropPluginOptions = {}): Plugin & {
  * });
  * ```
  */
-export function createFaceCropTransform(options: FaceCropPluginOptions = {}): TransformFactory<FaceCropConfig> {
+export function createFaceCropTransform(
+  options: FaceCropPluginOptions = {}
+): TransformFactory<FaceCropConfig> {
   const padding = options.padding ?? DEFAULT_PADDING;
 
   // Set cache dir if provided (legacy fallback)

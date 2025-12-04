@@ -87,9 +87,7 @@ describe("IconButton", () => {
   });
 
   it("has no accessibility violations with aria-label", async () => {
-    const { container } = render(
-      <IconButton aria-label="Share">*</IconButton>
-    );
+    const { container } = render(<IconButton aria-label="Share">*</IconButton>);
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });

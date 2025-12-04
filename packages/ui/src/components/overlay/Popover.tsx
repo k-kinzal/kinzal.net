@@ -40,8 +40,7 @@ const popoverVariants = cva(
  * Props for the Popover component.
  */
 export interface PopoverProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "content">,
-    VariantProps<typeof popoverVariants> {
+  extends Omit<HTMLAttributes<HTMLDivElement>, "content">, VariantProps<typeof popoverVariants> {
   /** The content to display in the popover */
   content: ReactNode;
   /** The trigger element */
@@ -147,10 +146,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       if (!closeOnClickOutside || !isOpen) return;
 
       const handleClickOutside = (e: MouseEvent) => {
-        if (
-          containerRef.current &&
-          !containerRef.current.contains(e.target as Node)
-        ) {
+        if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
           setOpen(false);
         }
       };
@@ -162,16 +158,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const ariaLabel = props["aria-label"];
 
     return (
-      <div
-        ref={containerRef}
-        className="relative inline-block"
-        onKeyDown={handleKeyDown}
-      >
-        <div
-          ref={ref}
-          onClick={toggle}
-          {...props}
-        >
+      <div ref={containerRef} className="relative inline-block" onKeyDown={handleKeyDown}>
+        <div ref={ref} onClick={toggle} {...props}>
           {children}
         </div>
         {isOpen && (

@@ -33,7 +33,7 @@ describe("NavBrand", () => {
 
   it("accepts custom className for border styling", () => {
     render(
-      <NavBrand href="/" className="border-l-4 border-l-primary pl-4">
+      <NavBrand href="/" className="border-l-primary border-l-4 pl-4">
         Brand
       </NavBrand>
     );

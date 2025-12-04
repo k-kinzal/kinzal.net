@@ -3,10 +3,7 @@ import { renderHook, act } from "@testing-library/react";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 
 // Store callbacks for each observer instance
-const observerCallbacks = new Map<
-  MockIntersectionObserver,
-  IntersectionObserverCallback
->();
+const observerCallbacks = new Map<MockIntersectionObserver, IntersectionObserverCallback>();
 const observedElements = new Map<Element, MockIntersectionObserver>();
 
 const mockObserve = vi.fn((element: Element) => {
@@ -21,10 +18,7 @@ class MockIntersectionObserver implements IntersectionObserver {
   readonly thresholds: ReadonlyArray<number> = [];
   private callback: IntersectionObserverCallback;
 
-  constructor(
-    callback: IntersectionObserverCallback,
-    _options?: IntersectionObserverInit
-  ) {
+  constructor(callback: IntersectionObserverCallback, _options?: IntersectionObserverInit) {
     this.callback = callback;
     observerCallbacks.set(this, callback);
   }
@@ -49,10 +43,7 @@ class MockIntersectionObserver implements IntersectionObserver {
 
   // Helper to trigger callback
   triggerIntersection(isIntersecting: boolean) {
-    this.callback(
-      [{ isIntersecting } as IntersectionObserverEntry],
-      this
-    );
+    this.callback([{ isIntersecting } as IntersectionObserverEntry], this);
   }
 }
 
@@ -62,10 +53,7 @@ function triggerElementIntersection(element: Element, isIntersecting: boolean) {
   if (observer) {
     const callback = observerCallbacks.get(observer);
     if (callback) {
-      callback(
-        [{ isIntersecting } as IntersectionObserverEntry],
-        observer
-      );
+      callback([{ isIntersecting } as IntersectionObserverEntry], observer);
     }
   }
 }
@@ -263,25 +251,19 @@ describe("useIntersectionObserver", () => {
     });
 
     it("accepts custom rootMargin", () => {
-      const { result } = renderHook(() =>
-        useIntersectionObserver({ rootMargin: "100px" })
-      );
+      const { result } = renderHook(() => useIntersectionObserver({ rootMargin: "100px" }));
 
       expect(result.current.isIntersecting).toBe(false);
     });
 
     it("accepts custom threshold", () => {
-      const { result } = renderHook(() =>
-        useIntersectionObserver({ threshold: 0.5 })
-      );
+      const { result } = renderHook(() => useIntersectionObserver({ threshold: 0.5 }));
 
       expect(result.current.isIntersecting).toBe(false);
     });
 
     it("accepts array threshold", () => {
-      const { result } = renderHook(() =>
-        useIntersectionObserver({ threshold: [0, 0.5, 1] })
-      );
+      const { result } = renderHook(() => useIntersectionObserver({ threshold: [0, 0.5, 1] }));
 
       expect(result.current.isIntersecting).toBe(false);
     });

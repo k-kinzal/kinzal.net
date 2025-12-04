@@ -21,7 +21,7 @@ describe("Icon", () => {
   });
 
   it("accepts custom className", () => {
-    render(<Icon icon={Star} className="w-8 h-8 text-primary" data-testid="icon" />);
+    render(<Icon icon={Star} className="text-primary h-8 w-8" data-testid="icon" />);
     const icon = screen.getByTestId("icon");
     expect(icon).toHaveClass("w-8", "h-8", "text-primary");
   });

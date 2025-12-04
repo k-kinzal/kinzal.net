@@ -1,13 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import {
-  Drawer,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerBody,
-  DrawerFooter,
-  DrawerClose,
-} from "./Drawer";
+import { Drawer, DrawerHeader, DrawerTitle, DrawerBody, DrawerFooter, DrawerClose } from "./Drawer";
 import { Button } from "../primitives/Button";
 import { Stack } from "../layout/Stack";
 import { Text } from "../typography/Text";
@@ -120,24 +113,24 @@ function NavigationDemo() {
         </DrawerHeader>
         <DrawerBody className="p-0">
           <nav>
-            <button className="flex items-center gap-3 w-full px-4 py-3 text-left hover:bg-background-muted">
+            <button className="hover:bg-background-muted flex w-full items-center gap-3 px-4 py-3 text-left">
               <Icon icon={User} size={20} />
               <span>Profile</span>
             </button>
-            <button className="flex items-center gap-3 w-full px-4 py-3 text-left hover:bg-background-muted">
+            <button className="hover:bg-background-muted flex w-full items-center gap-3 px-4 py-3 text-left">
               <Icon icon={Settings} size={20} />
               <span>Settings</span>
             </button>
-            <button className="flex items-center gap-3 w-full px-4 py-3 text-left hover:bg-background-muted">
+            <button className="hover:bg-background-muted flex w-full items-center gap-3 px-4 py-3 text-left">
               <Icon icon={Bell} size={20} />
               <span>Notifications</span>
             </button>
             <Divider />
-            <button className="flex items-center gap-3 w-full px-4 py-3 text-left hover:bg-background-muted">
+            <button className="hover:bg-background-muted flex w-full items-center gap-3 px-4 py-3 text-left">
               <Icon icon={Shield} size={20} />
               <span>Privacy</span>
             </button>
-            <button className="flex items-center gap-3 w-full px-4 py-3 text-left hover:bg-background-muted">
+            <button className="hover:bg-background-muted flex w-full items-center gap-3 px-4 py-3 text-left">
               <Icon icon={Palette} size={20} />
               <span>Appearance</span>
             </button>
@@ -186,7 +179,7 @@ function SettingsDemo() {
             <Divider />
             <Stack gap="sm">
               <Text className="font-medium">Theme</Text>
-              <select className="w-full px-3 py-2 rounded border border-border bg-background">
+              <select className="border-border bg-background w-full rounded border px-3 py-2">
                 <option>System</option>
                 <option>Light</option>
                 <option>Dark</option>
@@ -216,10 +209,7 @@ function WithoutOverlayDemo() {
           <DrawerClose onClick={() => setOpen(false)} />
         </DrawerHeader>
         <DrawerBody>
-          <Text>
-            This drawer has no background overlay. The content behind is still
-            visible.
-          </Text>
+          <Text>This drawer has no background overlay. The content behind is still visible.</Text>
         </DrawerBody>
       </Drawer>
     </>
@@ -239,25 +229,25 @@ function BottomSheetDemo() {
         <DrawerBody>
           <Stack direction="horizontal" gap="lg" justify="center">
             <Stack align="center" gap="xs">
-              <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-500 text-white">
                 f
               </div>
               <Text size="sm">Facebook</Text>
             </Stack>
             <Stack align="center" gap="xs">
-              <div className="w-12 h-12 rounded-full bg-sky-500 flex items-center justify-center text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-500 text-white">
                 t
               </div>
               <Text size="sm">Twitter</Text>
             </Stack>
             <Stack align="center" gap="xs">
-              <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-white">
                 w
               </div>
               <Text size="sm">WhatsApp</Text>
             </Stack>
             <Stack align="center" gap="xs">
-              <div className="w-12 h-12 rounded-full bg-gray-500 flex items-center justify-center text-white">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-500 text-white">
                 @
               </div>
               <Text size="sm">Email</Text>
@@ -283,10 +273,9 @@ function LongContentDemo() {
           <Stack gap="md">
             {Array.from({ length: 20 }, (_, i) => (
               <Text key={i}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </Text>
             ))}
           </Stack>

@@ -1,16 +1,10 @@
-import {
-  forwardRef,
-  type HTMLAttributes,
-  type AnchorHTMLAttributes,
-  type ReactNode,
-} from "react";
+import { forwardRef, type HTMLAttributes, type AnchorHTMLAttributes, type ReactNode } from "react";
 import { cn } from "@/utils/cn";
 
 /**
  * Props for the BreadcrumbItem component.
  */
-export interface BreadcrumbItemProps
-  extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface BreadcrumbItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * When true, renders as text instead of link (for current page).
    * @defaultValue false
@@ -42,14 +36,7 @@ export const BreadcrumbItem = forwardRef<HTMLAnchorElement, BreadcrumbItemProps>
   ({ className, current = false, children, ...props }, ref) => {
     if (current) {
       return (
-        <span
-          className={cn(
-            "text-foreground",
-            "font-medium",
-            className
-          )}
-          aria-current="page"
-        >
+        <span className={cn("text-foreground", "font-medium", className)} aria-current="page">
           {children}
         </span>
       );
@@ -101,20 +88,12 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
     const items = Array.isArray(children) ? children : [children];
 
     return (
-      <nav
-        ref={ref}
-        aria-label="Breadcrumb"
-        className={cn("text-sm", className)}
-        {...props}
-      >
+      <nav ref={ref} aria-label="Breadcrumb" className={cn("text-sm", className)} {...props}>
         <ol className="flex items-center gap-2">
           {items.map((child, index) => (
             <li key={index} className="flex items-center gap-2">
               {index > 0 && (
-                <span
-                  className="text-foreground-muted"
-                  aria-hidden="true"
-                >
+                <span className="text-foreground-muted" aria-hidden="true">
                   {separator}
                 </span>
               )}

@@ -17,9 +17,7 @@ describe("Image", () => {
   });
 
   it("applies objectFit classes correctly", () => {
-    const { rerender } = render(
-      <Image src="/test.jpg" alt="Test" objectFit="contain" />
-    );
+    const { rerender } = render(<Image src="/test.jpg" alt="Test" objectFit="contain" />);
     expect(screen.getByRole("img")).toHaveClass("object-contain");
 
     rerender(<Image src="/test.jpg" alt="Test" objectFit="fill" />);

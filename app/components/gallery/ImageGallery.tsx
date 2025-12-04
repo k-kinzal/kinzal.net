@@ -30,16 +30,12 @@ interface ImageGalleryProps {
  * - 4 columns on small screens
  * - 6 columns on medium+ screens
  */
-export function ImageGallery({
-  images,
-  category,
-  initialSelectedImage,
-}: ImageGalleryProps) {
+export function ImageGallery({ images, category, initialSelectedImage }: ImageGalleryProps) {
   const { hash: selectedImage, setHash: setSelectedImage } = useHash(initialSelectedImage);
   const hasSelection = selectedImage !== "";
 
   return (
-    <Stack className="relative w-full h-full m-0 p-0" id="content">
+    <Stack className="relative m-0 h-full w-full p-0" id="content">
       {images.map((img: string) => (
         <ImageViewer
           key={`view-${img}`}
@@ -52,7 +48,7 @@ export function ImageGallery({
       ))}
       <Stack
         data-testid="thumbnail-grid"
-        className={`absolute top-0 w-full h-full overflow-scroll [WebkitOverflowScrolling:touch] pt-header pb-footer ${
+        className={`[WebkitOverflowScrolling:touch] pt-header pb-footer absolute top-0 h-full w-full overflow-scroll ${
           hasSelection ? "-left-full" : "left-0"
         }`}
       >

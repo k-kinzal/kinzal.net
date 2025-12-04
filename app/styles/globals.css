@@ -21,9 +21,9 @@
 html,
 body,
 #root {
-  @apply w-full h-full;
+  @apply h-full w-full;
 }
 
 body {
-  @apply overflow-hidden bg-background-dark;
+  @apply bg-background-dark overflow-hidden;
 }

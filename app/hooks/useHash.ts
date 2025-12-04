@@ -30,16 +30,10 @@ function subscribeToHash(callback: () => void): () => void {
  */
 export function useHash(initialHash?: string) {
   // Track if we're in a controlled mode (Storybook/testing)
-  const [controlledHash, setControlledHash] = useState<string | undefined>(
-    initialHash
-  );
+  const [controlledHash, setControlledHash] = useState<string | undefined>(initialHash);
 
   // Use external store for browser hash
-  const browserHash = useSyncExternalStore(
-    subscribeToHash,
-    getHash,
-    () => initialHash ?? ""
-  );
+  const browserHash = useSyncExternalStore(subscribeToHash, getHash, () => initialHash ?? "");
 
   // Use controlled hash if set, otherwise browser hash
   const hash = controlledHash !== undefined ? controlledHash : browserHash;
@@ -55,11 +49,7 @@ export function useHash(initialHash?: string) {
           window.location.hash = newHash;
         } else {
           // Clear hash without page jump
-          window.history.pushState(
-            null,
-            "",
-            window.location.pathname + window.location.search
-          );
+          window.history.pushState(null, "", window.location.pathname + window.location.search);
           window.dispatchEvent(new HashChangeEvent("hashchange"));
         }
       }
