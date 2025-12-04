@@ -5,7 +5,6 @@ node_modules/
 .DS_Store
 npm-debug.log
 *.lock
-index.html
 original.html
 scrap.html
 
