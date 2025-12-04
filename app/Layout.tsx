@@ -1,47 +1,26 @@
 import { Outlet } from "react-router-dom";
-import { Head } from "vite-react-ssg";
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 
+/**
+ * Root layout component for the application.
+ *
+ * @remarks
+ * Provides:
+ * - Navbar fixed to top of viewport
+ * - Footer fixed to bottom of viewport
+ * - Outlet for page content
+ */
 export function Layout() {
   return (
     <>
-      <Head>
-        <meta charSet="utf-8" />
-        <title>RakugakiYa</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <link rel="shortcut icon" href="/app/images/favicon.png" />
-        <link rel="apple-touch-icon" href="/app/images/icon-57.png" />
-        <link
-          rel="apple-touch-icon"
-          sizes="76x76"
-          href="/app/images/icon-76.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="120x120"
-          href="/app/images/icon-120.png"
-        />
-        <link
-          rel="apple-touch-icon"
-          sizes="152x152"
-          href="/app/images/icon-152.png"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap"
-        />
-      </Head>
+      <div className="fixed top-0 left-0 w-full z-50">
+        <Navbar />
+      </div>
       <Outlet />
+      <div className="fixed bottom-0 left-0 w-full z-50">
+        <Footer />
+      </div>
     </>
   );
 }

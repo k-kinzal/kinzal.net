@@ -8,17 +8,17 @@ export const routes: RouteRecord[] = [
     children: [
       {
         index: true,
-        lazy: () => import("./pages/Home"),
+        lazy: () => import("./pages/home"),
       },
       {
         path: "original.html",
-        lazy: () => import("./pages/Original"),
-        entry: "app/pages/Original.tsx",
+        lazy: () => import("./pages/original"),
+        entry: "app/pages/original/Original.tsx",
       },
       {
         path: "scrap.html",
-        lazy: () => import("./pages/Scrap"),
-        entry: "app/pages/Scrap.tsx",
+        lazy: () => import("./pages/scrap"),
+        entry: "app/pages/scrap/Scrap.tsx",
       },
     ],
   },
