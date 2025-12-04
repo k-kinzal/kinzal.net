@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "description": "Face detection transform for vite-imagetools",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -13,25 +10,21 @@
       "require": "./dist/index.cjs"
     }
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "scripts": {
-    "dev": "vite build --watch",
     "build": "vite build && tsc --emitDeclarationOnly",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint src/",
-    "lint:fix": "eslint src/ --fix",
+    "dev": "vite build --watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\"",
-    "quality": "npm run typecheck && npm run lint && npm run format:check"
-  },
-  "peerDependencies": {
-    "imagetools-core": "^9.0.0",
-    "vite": "^5.0.0 || ^6.0.0 || ^7.0.0"
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "quality": "npm run typecheck && npm run lint && npm run format:check",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "animedetect": "^0.0.6",
@@ -44,5 +37,12 @@
     "typescript": "^5.9.3",
     "vite": "^7.2.4",
     "vite-plugin-dts": "^4.5.4"
+  },
+  "peerDependencies": {
+    "imagetools-core": "^9.0.0",
+    "vite": "^5.0.0 || ^6.0.0 || ^7.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

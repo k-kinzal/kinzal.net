@@ -3,33 +3,30 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { useImageVariant, IMAGE_VARIANTS, type ImageVariant } from "./useImageVariant";
 
 // Mock the virtual:image-variants module
-// Returns { default: string } to match dynamic import behavior
+// Returns string directly (import.meta.glob with `import: 'default'` extracts the default export)
 vi.mock("virtual:image-variants", () => ({
   imageVariants: {
     "/app/images/original/test.jpg": {
-      "faceCrop&w=200&h=200&fit=cover": () =>
-        Promise.resolve({ default: "/images/test-thumb-sm.jpg" }),
+      "faceCrop&w=200&h=200&fit=cover": () => Promise.resolve("/images/test-thumb-sm.jpg"),
       "faceCrop&w=200&h=200&fit=cover&format=avif": () =>
-        Promise.resolve({ default: "/images/test-thumb-sm.avif" }),
+        Promise.resolve("/images/test-thumb-sm.avif"),
       "faceCrop&w=200&h=200&fit=cover&format=webp": () =>
-        Promise.resolve({ default: "/images/test-thumb-sm.webp" }),
-      "faceCrop&w=400&h=400&fit=cover": () =>
-        Promise.resolve({ default: "/images/test-thumb-md.jpg" }),
+        Promise.resolve("/images/test-thumb-sm.webp"),
+      "faceCrop&w=400&h=400&fit=cover": () => Promise.resolve("/images/test-thumb-md.jpg"),
       "faceCrop&w=400&h=400&fit=cover&format=avif": () =>
-        Promise.resolve({ default: "/images/test-thumb-md.avif" }),
+        Promise.resolve("/images/test-thumb-md.avif"),
       "faceCrop&w=400&h=400&fit=cover&format=webp": () =>
-        Promise.resolve({ default: "/images/test-thumb-md.webp" }),
+        Promise.resolve("/images/test-thumb-md.webp"),
     },
     "/app/images/scrap/scrap-test.jpg": {
-      "faceCrop&w=600&h=600&fit=cover": () =>
-        Promise.resolve({ default: "/images/scrap-thumb-lg.jpg" }),
+      "faceCrop&w=600&h=600&fit=cover": () => Promise.resolve("/images/scrap-thumb-lg.jpg"),
       "faceCrop&w=600&h=600&fit=cover&format=avif": () =>
-        Promise.resolve({ default: "/images/scrap-thumb-lg.avif" }),
+        Promise.resolve("/images/scrap-thumb-lg.avif"),
       "faceCrop&w=600&h=600&fit=cover&format=webp": () =>
-        Promise.resolve({ default: "/images/scrap-thumb-lg.webp" }),
+        Promise.resolve("/images/scrap-thumb-lg.webp"),
     },
     "/app/images/original/fallback.jpg": {
-      "w=1920&fit=inside": () => Promise.resolve({ default: "/images/fallback-full.jpg" }),
+      "w=1920&fit=inside": () => Promise.resolve("/images/fallback-full.jpg"),
       // Only fallback available, no avif/webp
     },
     "/app/images/original/error.jpg": {

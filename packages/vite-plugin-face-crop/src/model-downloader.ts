@@ -37,7 +37,6 @@ async function downloadFile(url: string, destPath: string): Promise<void> {
     const request = (targetUrl: string) => {
       https
         .get(targetUrl, (response) => {
-          // Handle redirects (Hugging Face uses redirects)
           if (response.statusCode === 301 || response.statusCode === 302) {
             const redirectUrl = response.headers.location;
             if (redirectUrl) {

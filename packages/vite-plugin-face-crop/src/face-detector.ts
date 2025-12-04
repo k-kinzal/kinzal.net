@@ -9,7 +9,38 @@ let yoloDetectorFn:
   | false
   | null = null;
 
-let detectionMutex: Promise<void> = Promise.resolve();
+/**
+ * Simple semaphore for limiting concurrent operations.
+ */
+class Semaphore {
+  private permits: number;
+  private waiting: (() => void)[] = [];
+
+  constructor(permits: number) {
+    this.permits = permits;
+  }
+
+  async acquire(): Promise<void> {
+    if (this.permits > 0) {
+      this.permits--;
+      return;
+    }
+    return new Promise<void>((resolve) => {
+      this.waiting.push(resolve);
+    });
+  }
+
+  release(): void {
+    const next = this.waiting.shift();
+    if (next) {
+      next();
+    } else {
+      this.permits++;
+    }
+  }
+}
+
+const animedetectSemaphore = new Semaphore(1);
 
 /**
  * Sets the cache directory for storing downloaded models.
@@ -54,40 +85,45 @@ async function detectWithAnimedetect(imagePath: string): Promise<FaceRect | null
     return null;
   }
 
-  const runDetection = async (retryCount = 0): Promise<FaceRect | null> => {
-    try {
-      const result = await detector(imagePath);
-      if (result && result.objects && result.objects.size() > 0) {
-        let largest: FaceRect | null = null;
-        let largestArea = 0;
+  await animedetectSemaphore.acquire();
+  try {
+    const runDetection = async (retryCount = 0): Promise<FaceRect | null> => {
+      try {
+        const result = await detector(imagePath);
+        if (result && result.objects && result.objects.size() > 0) {
+          let largest: FaceRect | null = null;
+          let largestArea = 0;
 
-        for (let i = 0; i < result.objects.size(); i++) {
-          const rect = result.objects.get(i);
-          const area = rect.width * rect.height;
-          if (area > largestArea) {
-            largestArea = area;
-            largest = {
-              x: rect.x,
-              y: rect.y,
-              width: rect.width,
-              height: rect.height,
-            };
+          for (let i = 0; i < result.objects.size(); i++) {
+            const rect = result.objects.get(i);
+            const area = rect.width * rect.height;
+            if (area > largestArea) {
+              largestArea = area;
+              largest = {
+                x: rect.x,
+                y: rect.y,
+                width: rect.width,
+                height: rect.height,
+              };
+            }
           }
+
+          return largest;
         }
-
-        return largest;
+        return null;
+      } catch (e) {
+        const message = e instanceof Error ? e.message : String(e);
+        if (message.includes("cv.Mat is not a constructor") && retryCount < 1) {
+          return runDetection(retryCount + 1);
+        }
+        throw e;
       }
-      return null;
-    } catch (e) {
-      const message = e instanceof Error ? e.message : String(e);
-      if (message.includes("cv.Mat is not a constructor") && retryCount < 1) {
-        return runDetection(retryCount + 1);
-      }
-      throw e;
-    }
-  };
+    };
 
-  return runDetection();
+    return await runDetection();
+  } finally {
+    animedetectSemaphore.release();
+  }
 }
 
 async function detectWithYOLO(imagePath: string, logger: Logger): Promise<FaceRect | null> {
@@ -104,46 +140,34 @@ async function detectWithYOLO(imagePath: string, logger: Logger): Promise<FaceRe
  * Detects an anime/illustration face in an image using a fallback chain.
  *
  * Detection order:
- * 1. animedetect (LBP cascade, fast, ~83% accuracy)
- * 2. YOLO v1.4_s (deep learning, slower, ~95% accuracy)
+ * 1. YOLO v1.4_s (deep learning, ~95% accuracy, parallelizable)
+ * 2. animedetect (LBP cascade, ~83% accuracy, serialized fallback)
  *
  * @param imagePath - Absolute path to the image file
  * @param logger - Logger instance from imagetools context
  * @returns The largest detected face rectangle, or null if no face found
  */
 export async function detectAnimeFace(imagePath: string, logger: Logger): Promise<FaceRect | null> {
-  let releaseMutex: () => void;
-  const previousMutex = detectionMutex;
-  detectionMutex = new Promise<void>((resolve) => {
-    releaseMutex = resolve;
-  });
+  try {
+    const yoloResult = await detectWithYOLO(imagePath, logger);
+    if (yoloResult) {
+      return yoloResult;
+    }
+  } catch (e) {
+    const message = e instanceof Error ? e.message : String(e);
+    logger.warn(`YOLO detection error: ${message}`);
+  }
 
   try {
-    await previousMutex;
-
-    try {
-      const primaryResult = await detectWithAnimedetect(imagePath);
-      if (primaryResult) {
-        return primaryResult;
-      }
-    } catch {
-      // animedetect failed, will try YOLO fallback
+    const animedetectResult = await detectWithAnimedetect(imagePath);
+    if (animedetectResult) {
+      return animedetectResult;
     }
-
-    try {
-      const fallbackResult = await detectWithYOLO(imagePath, logger);
-      if (fallbackResult) {
-        return fallbackResult;
-      }
-    } catch (e) {
-      const message = e instanceof Error ? e.message : String(e);
-      logger.warn(`YOLO fallback error: ${message}`);
-    }
-
-    return null;
-  } finally {
-    releaseMutex!();
+  } catch {
+    // animedetect failed, no face found
   }
+
+  return null;
 }
 
 /**

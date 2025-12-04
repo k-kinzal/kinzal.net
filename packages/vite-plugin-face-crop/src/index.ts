@@ -158,7 +158,6 @@ export function createFaceCropTransform(
 ): TransformFactory<FaceCropConfig> {
   const padding = options.padding ?? DEFAULT_PADDING;
 
-  // Set cache dir if provided (legacy fallback)
   if (options.cacheDir) {
     setCacheDir(path.join(options.cacheDir, PLUGIN_CACHE_SUBDIR));
   }

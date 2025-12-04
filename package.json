@@ -1,43 +1,51 @@
 {
   "name": "kinzal.net",
   "version": "1.0.0",
+  "private": true,
   "description": "Illustration portfolio of kinzal.",
-  "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "dev": "vite",
-    "build": "vite-react-ssg build && npm run postbuild",
-    "postbuild": "node -e \"const fs=require('fs'); ['original','scrap'].forEach(f => { const src='dist/'+f+'.html.html'; const dst='dist/'+f+'.html'; if(fs.existsSync(src)) { fs.renameSync(src,dst); console.log('Renamed',src,'->',dst); } });\"",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:vrt": "playwright test",
-    "storybook": "storybook dev",
-    "build-storybook": "storybook build",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint app/ && stylelint \"app/**/*.css\"",
-    "lint:fix": "eslint app/ --fix && stylelint \"app/**/*.css\" --fix",
-    "format": "prettier --write \"app/**/*.{ts,tsx,css,json}\"",
-    "format:check": "prettier --check \"app/**/*.{ts,tsx,css,json}\"",
-    "quality": "npm run typecheck && npm run lint && npm run format:check && npm run test"
-  },
+  "homepage": "http://kinzal.net/",
   "repository": {
     "type": "git",
     "url": "https://github.com/k-kinzal/kinzal.net.git"
   },
   "author": "k-kinzal",
-  "homepage": "http://kinzal.net/",
-  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "vite-react-ssg build && npm run postbuild",
+    "postbuild": "node -e \"const fs=require('fs'); ['original','scrap'].forEach(f => { const src='dist/'+f+'.html.html'; const dst='dist/'+f+'.html'; if(fs.existsSync(src)) { fs.renameSync(src,dst); console.log('Renamed',src,'->',dst); } });\"",
+    "build-storybook": "storybook build",
+    "dev": "vite",
+    "format": "prettier --write \"app/**/*.{ts,tsx,css,json}\"",
+    "format:check": "prettier --check \"app/**/*.{ts,tsx,css,json}\"",
+    "lint": "eslint app/ && stylelint \"app/**/*.css\"",
+    "lint:fix": "eslint app/ --fix && stylelint \"app/**/*.css\" --fix",
+    "preview": "vite preview",
+    "quality": "npm run typecheck && npm run lint && npm run format:check && npm run test",
+    "storybook": "storybook dev",
+    "test": "vitest run",
+    "test:vrt": "playwright test",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kinzal-net/ui": "*",
+    "lucide-react": "^0.555.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router": "^7.9.6",
+    "react-router-dom": "^6.28.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@kinzal-net/vite-plugin-face-crop": "*",
     "@playwright/test": "^1.56.1",
-    "@rollup/plugin-terser": "^0.4.4",
     "@storybook/addon-a11y": "^10.1.4",
     "@storybook/addon-docs": "^10.0.8",
-    "@storybook/html-vite": "^10.0.8",
+    "@storybook/addon-themes": "^10.0.8",
+    "@storybook/react-vite": "^10.0.8",
     "@tailwindcss/vite": "^4.1.17",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -49,11 +57,8 @@
     "eslint": "^9.39.1",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "glob": "^10.3.10",
-    "handlebars": "^4.7.8",
     "jsdom": "^26.1.0",
     "lightningcss": "^1.30.2",
-    "lodash": "^4.17.21",
     "postcss": "^8.4.49",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
@@ -70,14 +75,5 @@
     "vite-plugin-compression": "^0.5.1",
     "vite-react-ssg": "^0.8.9",
     "vitest": "^3.2.4"
-  },
-  "dependencies": {
-    "@kinzal-net/ui": "*",
-    "echo-js": "^1.7.3",
-    "lucide-react": "^0.555.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "react-router": "^7.9.6",
-    "react-router-dom": "^6.28.0"
   }
 }

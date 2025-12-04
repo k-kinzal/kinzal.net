@@ -3,11 +3,7 @@ import { renderHook, act } from "@testing-library/react";
 import { useHash } from "./useHash";
 
 describe("useHash", () => {
-  const originalLocation = window.location;
-  const originalHistory = window.history;
-
   beforeEach(() => {
-    // Reset hash before each test
     window.location.hash = "";
   });
 

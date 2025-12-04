@@ -6,9 +6,7 @@ import { useIntersectionObserver } from "./useIntersectionObserver";
 const observerCallbacks = new Map<MockIntersectionObserver, IntersectionObserverCallback>();
 const observedElements = new Map<Element, MockIntersectionObserver>();
 
-const mockObserve = vi.fn((element: Element) => {
-  // Track which observer is observing which element
-});
+const mockObserve = vi.fn((_element: Element) => {});
 const mockDisconnect = vi.fn();
 const mockUnobserve = vi.fn();
 
@@ -83,8 +81,7 @@ describe("useIntersectionObserver", () => {
   it("observes element when ref is attached", () => {
     const element = document.createElement("div");
 
-    // Create a wrapper that sets the ref immediately so useEffect can observe it
-    const { result } = renderHook(() => {
+    renderHook(() => {
       const hookResult = useIntersectionObserver<HTMLDivElement>();
       if (!hookResult.ref.current) {
         (hookResult.ref as { current: HTMLDivElement | null }).current = element;
@@ -92,7 +89,6 @@ describe("useIntersectionObserver", () => {
       return hookResult;
     });
 
-    // The effect should have run and observed the element
     expect(mockObserve).toHaveBeenCalledWith(element);
   });
 

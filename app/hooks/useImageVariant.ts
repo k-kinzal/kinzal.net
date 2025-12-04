@@ -59,19 +59,21 @@ async function loadImageSources(
   const fallbackQuery = buildQuery(variant, "png");
 
   try {
-    const [avifResult, webpResult, fallbackResult] = await Promise.all([
+    // Note: glob functions already resolve to the URL string directly
+    // (via import.meta.glob with `import: 'default'`)
+    const [avif, webp, fallback] = await Promise.all([
       variants[avifQuery]?.(),
       variants[webpQuery]?.(),
       variants[fallbackQuery]?.(),
     ]);
 
-    if (!fallbackResult) return null;
+    if (!fallback) return null;
 
-    const fallback = fallbackResult.default;
-    const avif = avifResult?.default || fallback;
-    const webp = webpResult?.default || fallback;
-
-    return { avif, webp, fallback };
+    return {
+      avif: avif || fallback,
+      webp: webp || fallback,
+      fallback,
+    };
   } catch {
     return null;
   }

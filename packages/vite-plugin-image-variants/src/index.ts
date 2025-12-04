@@ -87,19 +87,15 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
    * e.g., './app/images/**\/*.{jpg,png}' -> '/app/images'
    */
   function extractBaseDir(pattern: string): string {
-    // Remove leading ./ if present
     let normalized = pattern.startsWith("./") ? pattern.slice(1) : pattern;
-    // Ensure leading /
     if (!normalized.startsWith("/")) {
       normalized = "/" + normalized;
     }
-    // Find the first glob character and take the directory before it
     const globIndex = normalized.search(/[*?{]/);
     if (globIndex === -1) {
       return normalized;
     }
     const beforeGlob = normalized.slice(0, globIndex);
-    // Remove trailing slash and filename part if any
     const lastSlash = beforeGlob.lastIndexOf("/");
     return lastSlash > 0 ? beforeGlob.slice(0, lastSlash) : beforeGlob;
   }
@@ -113,12 +109,10 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
     if (match?.[1]) {
       return match[1];
     }
-    // Single extension like *.jpg
     const singleMatch = pattern.match(/\.(\w+)$/);
     if (singleMatch?.[1]) {
       return singleMatch[1];
     }
-    // Default fallback
     return "jpg,jpeg,png";
   }
 
@@ -129,13 +123,10 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
    */
   function generateCode(files: string[]): string {
     const lines: string[] = [];
-
-    // Extract base directory and extensions from input pattern
     const baseDir = extractBaseDir(input);
     const extensions = extractExtensions(input);
     const globPattern = `${baseDir}/**/*.{${extensions}}`;
 
-    // Build glob patterns for each query
     for (let i = 0; i < queries.length; i++) {
       const query = queries[i];
       lines.push(
@@ -147,13 +138,11 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
     lines.push("export const imageVariants = {");
 
     for (const file of files) {
-      // Use absolute path from project root
       const key = `/${file}`;
       lines.push(`  '${key}': {`);
 
       for (let i = 0; i < queries.length; i++) {
         const query = queries[i];
-        // import.meta.glob returns () => Promise<string> for lazy loading
         lines.push(`    '${query}': glob${i}['${key}'],`);
       }
 
@@ -213,7 +202,6 @@ export function imageVariantsPlugin(options: ImageVariantsPluginOptions): Plugin
     },
 
     configureServer(server) {
-      // Watch the input pattern directory
       server.watcher.add(input);
 
       server.watcher.on("add", (file) => {
