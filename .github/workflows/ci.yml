@@ -35,5 +35,10 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Cache face detection model
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.vite/vite-plugin-face-crop/models
+          key: face-model-${{ runner.os }}
       - run: npm run build -ws --if-present
       - run: npm run build
