@@ -59,6 +59,7 @@ export default defineConfig(() => ({
   ssgOptions: {
     script: 'async',
     formatting: 'minify',
+    dirStyle: 'nested',
   } as any,
   plugins: [
     disableSsrManifest(),

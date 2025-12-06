@@ -21,7 +21,7 @@ test.beforeEach(async ({ context }) => {
 });
 
 test.describe('Visual Regression Tests', () => {
-    test('index.html should match snapshot', async ({ page }) => {
+    test('index page should match snapshot', async ({ page }) => {
         await page.goto('/');
         await page.waitForSelector('[data-testid="thumbnail-grid"]');
         // Wait for network idle - images may be lazy loaded
@@ -29,20 +29,20 @@ test.describe('Visual Regression Tests', () => {
         await expect(page).toHaveScreenshot('index.png', { timeout: 15000 });
     });
 
-    test('original.html should match snapshot', async ({ page }) => {
-        await page.goto('/original.html');
+    test('original page should match snapshot', async ({ page }) => {
+        await page.goto('/original');
         await waitForImagesInViewport(page);
         await expect(page).toHaveScreenshot('original.png', { timeout: 15000 });
     });
 
-    test('scrap.html should match snapshot', async ({ page }) => {
-        await page.goto('/scrap.html');
+    test('scrap page should match snapshot', async ({ page }) => {
+        await page.goto('/scrap');
         await waitForImagesInViewport(page);
         await expect(page).toHaveScreenshot('scrap.png', { timeout: 15000 });
     });
 
     test('image view page should match snapshot', async ({ page }) => {
-        await page.goto('/original.html#img001.jpg');
+        await page.goto('/original#img001.jpg');
         // Wait for the specific viewer (identified by id matching the hash) to appear
         await page.waitForSelector('[id="img001.jpg"][data-testid="image-viewer"]');
         // Wait for the image inside the target viewer to be visible (not hidden)
@@ -60,7 +60,7 @@ test.describe('E2E Tests', () => {
             consoleMessages.push({ type: msg.type(), text: msg.text() });
         });
 
-        await page.goto('/original.html');
+        await page.goto('/original');
 
         // Wait for thumbnail grid to appear (React rendering)
         await page.waitForSelector('[data-testid="thumbnail-grid"]');
@@ -103,7 +103,7 @@ test.describe('E2E Tests', () => {
     });
 
     test.describe('Common Elements', () => {
-        ['/', '/original.html', '/scrap.html'].forEach((path) => {
+        ['/', '/original', '/scrap'].forEach((path) => {
             test(`Header and Footer on ${path}`, async ({ page }) => {
                 await page.goto(path);
 
@@ -126,8 +126,8 @@ test.describe('E2E Tests', () => {
         });
     });
 
-    test('original.html content', async ({ page }) => {
-        await page.goto('/original.html');
+    test('original page content', async ({ page }) => {
+        await page.goto('/original');
         await waitForImagesInViewport(page);
 
         const images = page.locator('[data-testid="thumbnail-grid"] picture img');
@@ -135,8 +135,8 @@ test.describe('E2E Tests', () => {
         expect(count).toBeGreaterThan(0);
     });
 
-    test('scrap.html content', async ({ page }) => {
-        await page.goto('/scrap.html');
+    test('scrap page content', async ({ page }) => {
+        await page.goto('/scrap');
         await waitForImagesInViewport(page);
 
         const images = page.locator('[data-testid="thumbnail-grid"] picture img');
@@ -146,7 +146,7 @@ test.describe('E2E Tests', () => {
 
     test.describe('Image View Page', () => {
         test('navigate to image view via thumbnail click', async ({ page }) => {
-            await page.goto('/original.html');
+            await page.goto('/original');
             await waitForImagesInViewport(page);
 
             // Click on a thumbnail to navigate to the view
@@ -170,7 +170,7 @@ test.describe('E2E Tests', () => {
         });
 
         test('direct navigation to image view', async ({ page }) => {
-            await page.goto('/original.html#img001.jpg');
+            await page.goto('/original#img001.jpg');
 
             // Wait for page to stabilize
             await page.waitForSelector('[data-testid="image-viewer"]');
@@ -185,7 +185,7 @@ test.describe('E2E Tests', () => {
         });
 
         test('image view on scrap page', async ({ page }) => {
-            await page.goto('/scrap.html');
+            await page.goto('/scrap');
             await waitForImagesInViewport(page);
 
             // Click on a thumbnail

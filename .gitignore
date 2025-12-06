@@ -5,8 +5,6 @@ node_modules/
 .DS_Store
 npm-debug.log
 *.lock
-original.html
-scrap.html
 
 # React Router
 .react-router/

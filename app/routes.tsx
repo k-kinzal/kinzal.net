@@ -11,12 +11,12 @@ export const routes: RouteRecord[] = [
         lazy: () => import("./pages/home"),
       },
       {
-        path: "original.html",
+        path: "original",
         lazy: () => import("./pages/original"),
         entry: "app/pages/original/Original.tsx",
       },
       {
-        path: "scrap.html",
+        path: "scrap",
         lazy: () => import("./pages/scrap"),
         entry: "app/pages/scrap/Scrap.tsx",
       },

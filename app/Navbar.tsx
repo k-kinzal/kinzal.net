@@ -15,8 +15,8 @@ import { Logo } from "./components/brand";
  */
 export function Navbar() {
   const location = useLocation();
-  const isOriginal = location.pathname === "/" || location.pathname === "/original.html";
-  const isScrap = location.pathname === "/scrap.html";
+  const isOriginal = location.pathname === "/" || location.pathname === "/original";
+  const isScrap = location.pathname === "/scrap";
 
   return (
     <NavbarComponent className="h-header">
@@ -24,14 +24,14 @@ export function Navbar() {
         <Logo />
         <Stack direction="horizontal" gap="none" className="h-full">
           <NavLink
-            href="/original.html"
+            href="/original"
             active={isOriginal}
             className="border-border h-full w-[120px] border-l leading-[60px] font-light"
           >
             Original
           </NavLink>
           <NavLink
-            href="/scrap.html"
+            href="/scrap"
             active={isScrap}
             className="border-border h-full w-[120px] border-l leading-[60px] font-light"
           >
