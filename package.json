@@ -77,6 +77,6 @@
     "vite-imagetools": "^9.0.2",
     "vite-plugin-compression": "^0.5.1",
     "vite-react-ssg": "^0.8.9",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.15"
   }
 }
